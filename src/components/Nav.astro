@@ -4,10 +4,9 @@
 
 <header class="header glass" id="navbar">
   <div class="container nav-container">
-    <!-- Logo wordmark -->
+    <!-- Logo -->
     <a href="#" class="logo">
-      <span class="logo-accent">G</span>REEMETS
-      <span class="logo-sub">Green Metrics</span>
+      <img src={`${import.meta.env.BASE_URL}img/logo_nav.png`} alt="Green Metrics Solutions - GREEMETS" class="logo-img" />
     </a>
 
     <!-- Desktop Navigation Links -->
@@ -70,28 +69,20 @@
   /* Logo styling */
   .logo {
     display: flex;
-    flex-direction: column;
-    font-family: var(--font-serif);
-    font-weight: 700;
-    font-size: 1.5rem;
-    letter-spacing: 1px;
-    color: var(--forest-deep);
-    line-height: 1;
+    align-items: center;
+    flex-shrink: 0;
   }
 
-  .logo-accent {
-    color: var(--forest);
-    font-style: italic;
+  .logo-img {
+    height: 3rem;
+    width: 3rem;
+    object-fit: cover;
+    border-radius: 50%;
+    transition: transform var(--transition-fast);
   }
 
-  .logo-sub {
-    font-family: var(--font-sans);
-    font-size: 0.6rem;
-    font-weight: 500;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    margin-top: 2px;
+  .logo:hover .logo-img {
+    transform: scale(1.04);
   }
 
   /* Desktop links */
