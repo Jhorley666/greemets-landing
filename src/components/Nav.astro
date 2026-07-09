@@ -8,9 +8,13 @@
     <a href="#" class="logo">
       <img src={`${import.meta.env.BASE_URL}img/logo_nav.png`} alt="Green Metrics Solutions - GREEMETS" class="logo-img" />
       <span class="logo-text" aria-hidden="true">
-        <span class="logo-line logo-green">GREEN</span>
-        <span class="logo-line logo-blue">METRICS</span>
-        <span class="logo-line logo-blue">SOLUTIONS</span>
+        <span class="logo-row logo-row-primary">
+          <span class="logo-word logo-green">GREEN</span>
+          <span class="logo-word logo-metrics">METRICS</span>
+        </span>
+        <span class="logo-row logo-row-secondary">
+          <span class="logo-word logo-solutions">SOLUTIONS</span>
+        </span>
       </span>
     </a>
 
@@ -90,18 +94,45 @@
   .logo-text {
     display: flex;
     flex-direction: column;
+    gap: 0.05rem;
     line-height: 1.05;
     font-family: var(--font-sans);
-    font-size: 0.62rem;
     font-weight: 700;
     letter-spacing: 0.04em;
   }
 
-  .logo-green {
-    color: #0c8a0c;
+  .logo-row {
+    display: flex;
+    gap: 0.3rem;
   }
 
-  .logo-blue {
+  .logo-row-primary {
+    font-size: 0.8rem;
+  }
+
+  .logo-row-secondary {
+    justify-content: center;
+    font-size: 0.48rem;
+    letter-spacing: 0.08em;
+  }
+
+  .logo-green {
+    background: linear-gradient(180deg, #6fba01 0%, #0c8a0c 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
+  .logo-metrics {
+    background: linear-gradient(180deg, #058dbc 0%, #004a7b 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
+  .logo-solutions {
     color: #004a7b;
   }
 
@@ -110,8 +141,12 @@
   }
 
   @media (min-width: 900px) {
-    .logo-text {
-      font-size: 0.72rem;
+    .logo-row-primary {
+      font-size: 0.95rem;
+    }
+
+    .logo-row-secondary {
+      font-size: 0.52rem;
     }
   }
 
