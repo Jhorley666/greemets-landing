@@ -7,6 +7,11 @@
     <!-- Logo -->
     <a href="#" class="logo">
       <img src={`${import.meta.env.BASE_URL}img/logo_nav.png`} alt="Green Metrics Solutions - GREEMETS" class="logo-img" />
+      <span class="logo-text" aria-hidden="true">
+        <span class="logo-line logo-green">GREEN</span>
+        <span class="logo-line logo-blue">METRICS</span>
+        <span class="logo-line logo-blue">SOLUTIONS</span>
+      </span>
     </a>
 
     <!-- Desktop Navigation Links -->
@@ -70,6 +75,7 @@
   .logo {
     display: flex;
     align-items: center;
+    gap: 0.65rem;
     flex-shrink: 0;
   }
 
@@ -81,8 +87,32 @@
     transition: transform var(--transition-fast);
   }
 
+  .logo-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.05;
+    font-family: var(--font-sans);
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+
+  .logo-green {
+    color: #0c8a0c;
+  }
+
+  .logo-blue {
+    color: #004a7b;
+  }
+
   .logo:hover .logo-img {
     transform: scale(1.04);
+  }
+
+  @media (min-width: 900px) {
+    .logo-text {
+      font-size: 0.72rem;
+    }
   }
 
   /* Desktop links */
