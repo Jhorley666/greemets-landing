@@ -80,7 +80,7 @@ const projects = [
       {projects.map((project, idx) => (
         <div class="project-card reveal" style={`transition-delay: ${idx * 0.1}s;`} data-project-id={project.id}>
           <div class="project-img-wrapper">
-            <img src={`${import.meta.env.BASE_URL}${project.image.replace(/^\//, '')}`} alt={project.title} class="project-card-image" />
+            <img src={`${import.meta.env.BASE_URL}/${project.image.replace(/^\//, '')}`} alt={project.title} class="project-card-image" />
             <div class="project-card-overlay">
               <span class="project-tag-badge">{project.scope}</span>
             </div>
@@ -118,7 +118,7 @@ const projects = [
         <div class="dialog-grid">
           <!-- Left side: Image and metrics -->
           <div class="dialog-visual">
-            <img src={`${import.meta.env.BASE_URL}${project.image.replace(/^\//, '')}`} alt={project.title} class="dialog-image" />
+            <img src={`${import.meta.env.BASE_URL}/${project.image.replace(/^\//, '')}`} alt={project.title} class="dialog-image" />
             <div class="dialog-metrics">
               {project.metrics.map(metric => (
                 <div class="dialog-metric-box">
