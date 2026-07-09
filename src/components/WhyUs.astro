@@ -1,0 +1,302 @@
+---
+import { Brain, Globe, HeartPulse, TrendingUp } from '@lucide/astro';
+
+const pillars = [
+  {
+    id: 1,
+    title: "Rigor Científico e Ingeniería de Datos",
+    description: "Nuestras mediciones y auditorías no son meras estimaciones generales. Empleamos modelado avanzado y análisis de datos de ingeniería para entregar métricas indudables, permitiendo la toma de decisiones basada en hechos.",
+    icon: Brain,
+    badge: "Precisión"
+  },
+  {
+    id: 2,
+    title: "Homologación y Estándares Internacionales",
+    description: "Cada proceso, reporte y consultoría que estructuramos está diseñado para cumplir directamente con los requerimientos de auditorías de certificación formal bajo estándares globales como ISO, GHG Protocol o CDP.",
+    icon: Globe,
+    badge: "Garantía"
+  },
+  {
+    id: 3,
+    title: "Enfoque Humano y Prevención de Riesgos",
+    description: "La sostenibilidad ambiental es inseparable de la seguridad y el bienestar de quienes hacen posible su operación. Diseñamos entornos seguros y saludables mediante consultoría de seguridad industrial y salud ocupacional.",
+    icon: HeartPulse,
+    badge: "Bienestar"
+  },
+  {
+    id: 4,
+    title: "Retorno de Inversión (ROI) Sostenible",
+    description: "No consideramos el cumplimiento ambiental como un gasto normativo pasivo. Estructuramos proyectos de reducción de carbono y agua que optimizan la eficiencia operativa, generando ahorros que compensan la inversión.",
+    icon: TrendingUp,
+    badge: "Eficiencia"
+  }
+];
+---
+
+<section class="section whyus-section" id="por-que-nosotros">
+  <div class="container">
+    <div class="whyus-header reveal">
+      <span class="section-tag">Diferenciales</span>
+      <h2 class="whyus-title">¿Por qué elegir a <span class="accent-title">GREEMETS</span>?</h2>
+      <p class="whyus-subtitle">
+        Ofrecemos un modelo de consultoría premium que conecta la responsabilidad ecológica con la eficiencia operativa y el desarrollo humano.
+      </p>
+    </div>
+
+    <!-- Zig-Zag Alternating Layout -->
+    <div class="whyus-timeline">
+      {pillars.map((pillar, idx) => {
+        const IconComponent = pillar.icon;
+        const isEven = idx % 2 === 0;
+        return (
+          <div class={`pillar-row reveal ${isEven ? 'row-normal' : 'row-reversed'}`} style={`transition-delay: ${idx * 0.15}s;`}>
+            <!-- Visual Pillar Indicator Side -->
+            <div class="pillar-visual-side">
+              <div class="pillar-badge-box">
+                <span class="pillar-badge">{pillar.badge}</span>
+              </div>
+              <div class="pillar-icon-outer glass">
+                <IconComponent class="pillar-icon" />
+              </div>
+              <div class="pillar-line"></div>
+            </div>
+
+            <!-- Content text side -->
+            <div class="pillar-content-side">
+              <span class="pillar-number">Pilar 0{pillar.id}</span>
+              <h3 class="pillar-title">{pillar.title}</h3>
+              <p class="pillar-desc">{pillar.description}</p>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  </div>
+</section>
+
+<style>
+  .whyus-section {
+    background-color: var(--cream);
+    overflow: hidden;
+  }
+
+  .whyus-header {
+    text-align: center;
+    max-width: 750px;
+    margin: 0 auto var(--spacing-xl) auto;
+  }
+
+  .whyus-subtitle {
+    margin: 0 auto;
+    font-size: 1.1rem;
+  }
+
+  .section-tag {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--sage);
+    display: inline-block;
+    margin-bottom: 0.5rem;
+  }
+
+  .accent-title {
+    font-family: var(--font-serif);
+    font-style: italic;
+    color: var(--forest);
+    font-weight: 400;
+  }
+
+  /* Timeline styling */
+  .whyus-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+    position: relative;
+  }
+
+  .pillar-row {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    position: relative;
+  }
+
+  /* Visual pillar elements */
+  .pillar-visual-side {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    position: relative;
+  }
+
+  .pillar-badge-box {
+    display: inline-flex;
+  }
+
+  .pillar-badge {
+    background-color: var(--forest);
+    color: var(--bone);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 0.3rem 0.8rem;
+    border-radius: var(--radius-sm);
+  }
+
+  .pillar-icon-outer {
+    width: 3rem;
+    height: 3rem;
+    border-radius: var(--radius-full);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--forest);
+    border: 1px solid var(--sand);
+    background: rgba(255, 255, 255, 0.6);
+  }
+
+  :global(.pillar-icon) {
+    width: 1.5rem;
+    height: 1.5rem;
+    stroke-width: 2;
+  }
+
+  .pillar-line {
+    display: none; /* Desktop only */
+  }
+
+  /* Content elements */
+  .pillar-content-side {
+    background: var(--bone);
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md);
+    border: 1px solid oklch(0% 0 0 / 4%);
+    box-shadow: var(--shadow-sm);
+    flex-grow: 1;
+    transition: var(--transition-normal);
+  }
+
+  .pillar-row:hover .pillar-content-side {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--sand);
+  }
+
+  .pillar-number {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--sage);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: block;
+    margin-bottom: 0.3rem;
+  }
+
+  .pillar-title {
+    font-size: 1.25rem;
+    color: var(--forest-deep);
+    margin-bottom: 0.5rem;
+  }
+
+  .pillar-desc {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-bottom: 0;
+  }
+
+  /* Desktop styling - Alternating columns */
+  @media (min-width: 900px) {
+    .whyus-timeline {
+      padding: var(--spacing-md) 0;
+    }
+
+    .whyus-timeline::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 2px;
+      background-color: var(--sand);
+      opacity: 0.5;
+      z-index: 1;
+    }
+
+    .pillar-row {
+      display: grid;
+      grid-template-columns: 1fr 100px 1fr;
+      align-items: center;
+      gap: 0;
+    }
+
+    .pillar-visual-side {
+      grid-column: 2;
+      flex-direction: column;
+      justify-content: center;
+      height: 100%;
+      z-index: 5;
+      gap: 0.5rem;
+    }
+
+    .pillar-badge-box {
+      position: absolute;
+      bottom: 100%;
+      margin-bottom: 0.5rem;
+      white-space: nowrap;
+    }
+
+    .pillar-line {
+      display: block;
+      width: 2px;
+      height: 40px;
+      background-color: var(--forest);
+      opacity: 0.3;
+    }
+
+    /* Alternating text/image layout */
+    .row-normal .pillar-content-side {
+      grid-column: 1;
+      text-align: right;
+      padding-right: var(--spacing-lg);
+    }
+    
+    .row-normal .pillar-visual-side .pillar-badge-box {
+      right: 110%;
+    }
+
+    .row-reversed .pillar-content-side {
+      grid-column: 3;
+      text-align: left;
+      padding-left: var(--spacing-lg);
+    }
+
+    .row-reversed .pillar-visual-side .pillar-badge-box {
+      left: 110%;
+    }
+
+    .pillar-content-side {
+      background: transparent;
+      box-shadow: none;
+      border: none;
+      padding: 0;
+    }
+
+    .pillar-row:hover .pillar-content-side {
+      transform: none;
+      box-shadow: none;
+    }
+
+    .pillar-row:hover .pillar-icon-outer {
+      background-color: var(--forest-deep);
+      color: var(--accent);
+      transform: scale(1.1);
+      box-shadow: var(--shadow-sm);
+    }
+  }
+</style>

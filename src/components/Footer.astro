@@ -1,0 +1,414 @@
+---
+import { Mail, Phone, MapPin } from '@lucide/astro';
+
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="footer-section">
+  <div class="container footer-grid">
+    <!-- Brand column -->
+    <div class="footer-brand-col">
+      <a href="#" class="footer-logo">
+        <span class="logo-accent">G</span>REEMETS
+      </a>
+      <p class="footer-tagline">Green Metrics Solutions</p>
+      <p class="footer-desc">
+        Ingeniería y consultoría técnica especializada en cálculo, reducción y certificación de huellas ambientales en el sector industrial de Ecuador.
+      </p>
+      
+      <div class="social-links">
+        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn de GREEMETS" class="social-btn">
+          <svg class="social-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+            <rect x="2" y="9" width="4" height="12"></rect>
+            <circle cx="4" cy="4" r="2"></circle>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- Quick Links -->
+    <div class="footer-links-col">
+      <h3>Navegación</h3>
+      <ul class="footer-links-list">
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#sobre-nosotros">Nosotros</a></li>
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#casos">Casos de Éxito</a></li>
+        <li><a href="#por-que-nosotros">Diferenciales</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </div>
+
+    <!-- Services Links -->
+    <div class="footer-links-col">
+      <h3>Servicios Principales</h3>
+      <ul class="footer-links-list">
+        <li><a href="#servicios">Huella de Carbono</a></li>
+        <li><a href="#servicios">Huella Hídrica</a></li>
+        <li><a href="#servicios">Mitigación de Metano</a></li>
+        <li><a href="#servicios">Seguridad y Salud</a></li>
+        <li><a href="#servicios">Sistemas de Gestión ISO</a></li>
+      </ul>
+    </div>
+
+    <!-- Address / Details -->
+    <div class="footer-info-col">
+      <h3>Oficina Matriz</h3>
+      <div class="footer-address">
+        <div class="address-item">
+          <MapPin class="footer-info-icon" />
+          <span>Av. de los Granados y Av. Eloy Alfaro, Quito - Ecuador</span>
+        </div>
+        <div class="address-item">
+          <Phone class="footer-info-icon" />
+          <span>+593 (2) 345-6789</span>
+        </div>
+        <div class="address-item">
+          <Mail class="footer-info-icon" />
+          <span>contacto@greemets.com</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Bar -->
+  <div class="footer-bottom">
+    <div class="container bottom-container">
+      <p>&copy; {currentYear} Green Metrics Solutions GREEMETS. Todos los derechos reservados.</p>
+      <div class="bottom-links">
+        <a href="#legal-modal" id="legal-notice-btn">Aviso Legal</a>
+        <span>|</span>
+        <a href="#privacy-modal" id="privacy-policy-btn">Política de Privacidad</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dialog Notice Modals (for client evaluation / legal completeness) -->
+  <dialog class="legal-dialog" id="legal-dialog-el">
+    <div class="legal-dialog-content glass">
+      <button class="dialog-close-btn" id="close-legal-btn" aria-label="Cerrar aviso legal">&times;</button>
+      <h3>Aviso Legal</h3>
+      <div class="dialog-scroll-box">
+        <p><strong>Green Metrics Solutions GREEMETS</strong> es una marca comercial registrada en la República del Ecuador. Toda la información provista en este sitio web tiene carácter informativo y de presentación de servicios técnicos de consultoría.</p>
+        <p>Los derechos de propiedad intelectual del contenido, imágenes, código y textos de este sitio web pertenecen a GREEMETS o a sus respectivos licenciantes. Queda prohibida su reproducción parcial o total sin autorización expresa por escrito.</p>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog class="legal-dialog" id="privacy-dialog-el">
+    <div class="legal-dialog-content glass">
+      <button class="dialog-close-btn" id="close-privacy-btn" aria-label="Cerrar política de privacidad">&times;</button>
+      <h3>Política de Privacidad</h3>
+      <div class="dialog-scroll-box">
+        <p>De conformidad con la Ley Orgánica de Protección de Datos Personales de Ecuador, le informamos que los datos suministrados a través del formulario de contacto serán tratados exclusivamente para responder a su requerimiento comercial.</p>
+        <p>GREEMETS no vende, alquila ni comparte sus datos con terceros bajo ninguna circunstancia. Sus datos serán almacenados de forma segura e indefinida para el historial de correspondencia corporativa, a menos que solicite expresamente su eliminación escribiendo a contacto@greemets.com.</p>
+      </div>
+    </div>
+  </dialog>
+</footer>
+
+<style>
+  .footer-section {
+    background-color: var(--forest-deep);
+    color: var(--sage-light);
+    padding-top: var(--spacing-xl);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+    padding-bottom: var(--spacing-lg);
+  }
+
+  @media (min-width: 768px) {
+    .footer-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .footer-grid {
+      grid-template-columns: 4fr 2fr 2fr 4fr;
+    }
+  }
+
+  /* Logo */
+  .footer-logo {
+    font-family: var(--font-serif);
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--bone);
+    letter-spacing: 1px;
+    display: inline-block;
+  }
+
+  .logo-accent {
+    color: var(--accent);
+    font-style: italic;
+  }
+
+  .footer-tagline {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--accent);
+    margin-top: -0.2rem;
+    margin-bottom: 1rem;
+  }
+
+  .footer-desc {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--sage-light);
+    opacity: 0.8;
+    margin-bottom: 1.5rem;
+  }
+
+  /* Social links */
+  .social-links {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .social-btn {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: var(--radius-full);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    background-color: rgba(255, 255, 255, 0.03);
+    color: var(--bone);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-fast);
+  }
+
+  .social-btn:hover {
+    background-color: var(--accent);
+    color: var(--forest-deep);
+    border-color: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  :global(.social-icon) {
+    width: 1.2rem;
+    height: 1.2rem;
+  }
+
+  /* Links columns */
+  .footer-links-col h3,
+  .footer-info-col h3 {
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--bone);
+    letter-spacing: 1.5px;
+    margin-bottom: 1.2rem;
+  }
+
+  .footer-links-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .footer-links-list a {
+    font-size: 0.92rem;
+    color: var(--sage-light);
+    opacity: 0.8;
+  }
+
+  .footer-links-list a:hover {
+    color: var(--accent);
+    opacity: 1;
+    padding-left: 4px;
+  }
+
+  /* Address / Info */
+  .footer-address {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .address-item {
+    display: flex;
+    gap: 0.5rem;
+    align-items: flex-start;
+    font-size: 0.92rem;
+    line-height: 1.4;
+  }
+
+  :global(.footer-info-icon) {
+    width: 1.1rem;
+    height: 1.1rem;
+    color: var(--accent);
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+  }
+
+  /* Bottom Bar */
+  .footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 1.5rem 0;
+    font-size: 0.82rem;
+    color: var(--sage-light);
+    opacity: 0.7;
+  }
+
+  .bottom-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    text-align: center;
+  }
+
+  @media (min-width: 768px) {
+    .bottom-container {
+      flex-direction: row;
+      justify-content: space-between;
+      text-align: left;
+    }
+  }
+
+  .bottom-links {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+  }
+
+  .bottom-links a:hover {
+    color: var(--accent);
+    text-decoration: underline;
+  }
+
+  /* --- Dialog Notice Modals --- */
+  .legal-dialog {
+    border: none;
+    background: transparent;
+    padding: 0;
+    width: 90%;
+    max-width: 500px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.95);
+    z-index: 200;
+    outline: none;
+    box-shadow: var(--shadow-lg);
+    opacity: 0;
+    transition: transform var(--transition-normal), opacity var(--transition-normal);
+  }
+
+  .legal-dialog[open] {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+
+  .legal-dialog::backdrop {
+    background-color: oklch(20% 0.05 162 / 50%);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  .legal-dialog-content {
+    background: rgba(255, 255, 255, 0.98);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--sand);
+    padding: 2.2rem 1.8rem 1.8rem 1.8rem;
+    position: relative;
+  }
+
+  .legal-dialog-content h3 {
+    font-size: 1.25rem;
+    color: var(--forest-deep);
+    margin-bottom: 1rem;
+    border-bottom: 2px solid var(--sand);
+    padding-bottom: 0.4rem;
+  }
+
+  .dialog-close-btn {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.75rem;
+    background: transparent;
+    border: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: var(--text-muted);
+    transition: color var(--transition-fast);
+  }
+
+  .dialog-close-btn:hover {
+    color: var(--forest-deep);
+  }
+
+  .dialog-scroll-box {
+    max-height: 250px;
+    overflow-y: auto;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  .dialog-scroll-box p {
+    margin-bottom: 0.75rem;
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const legalBtn = document.getElementById('legal-notice-btn');
+    const privacyBtn = document.getElementById('privacy-policy-btn');
+    const legalDialog = document.getElementById('legal-dialog-el') as HTMLDialogElement | null;
+    const privacyDialog = document.getElementById('privacy-dialog-el') as HTMLDialogElement | null;
+    const closeLegal = document.getElementById('close-legal-btn');
+    const closePrivacy = document.getElementById('close-privacy-btn');
+
+    legalBtn?.addEventListener('click', (e) => {
+      e.preventDefault();
+      legalDialog?.showModal();
+      document.body.style.overflow = 'hidden';
+    });
+
+    privacyBtn?.addEventListener('click', (e) => {
+      e.preventDefault();
+      privacyDialog?.showModal();
+      document.body.style.overflow = 'hidden';
+    });
+
+    closeLegal?.addEventListener('click', () => {
+      legalDialog?.close();
+      document.body.style.overflow = '';
+    });
+
+    closePrivacy?.addEventListener('click', () => {
+      privacyDialog?.close();
+      document.body.style.overflow = '';
+    });
+
+    // Close on clicking backdrop
+    const handleBackdrop = (dialog: HTMLDialogElement | null) => {
+      dialog?.addEventListener('click', (e) => {
+        const rect = dialog.getBoundingClientRect();
+        const isInDialog = (
+          rect.top <= e.clientY && e.clientY <= rect.top + rect.height &&
+          rect.left <= e.clientX && e.clientX <= rect.left + rect.width
+        );
+        if (!isInDialog) {
+          dialog.close();
+          document.body.style.overflow = '';
+        }
+      });
+    };
+
+    handleBackdrop(legalDialog);
+    handleBackdrop(privacyDialog);
+  });
+</script>

@@ -1,0 +1,270 @@
+---
+// Nav.astro
+---
+
+<header class="header glass" id="navbar">
+  <div class="container nav-container">
+    <!-- Logo wordmark -->
+    <a href="#" class="logo">
+      <span class="logo-accent">G</span>REEMETS
+      <span class="logo-sub">Green Metrics</span>
+    </a>
+
+    <!-- Desktop Navigation Links -->
+    <nav class="nav-desktop" aria-label="Navegación principal">
+      <a href="#sobre-nosotros" class="nav-link">Nosotros</a>
+      <a href="#servicios" class="nav-link">Servicios</a>
+      <a href="#casos" class="nav-link">Casos de Éxito</a>
+      <a href="#por-que-nosotros" class="nav-link">Diferenciales</a>
+      <a href="#contacto" class="btn btn-primary btn-sm-nav">Hablar con un experto</a>
+    </nav>
+
+    <!-- Mobile Hamburger Toggle Button -->
+    <button class="burger" id="burger-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-menu">
+      <span class="burger-line"></span>
+      <span class="burger-line"></span>
+      <span class="burger-line"></span>
+    </button>
+  </div>
+
+  <!-- Mobile Menu Drawer -->
+  <div class="mobile-menu" id="mobile-menu">
+    <nav class="nav-mobile-links">
+      <a href="#sobre-nosotros" class="mobile-link">Nosotros</a>
+      <a href="#servicios" class="mobile-link">Servicios</a>
+      <a href="#casos" class="mobile-link">Casos de Éxito</a>
+      <a href="#por-que-nosotros" class="mobile-link">Diferenciales</a>
+      <a href="#contacto" class="btn btn-primary mobile-cta">Hablar con un experto</a>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .header {
+    position: fixed;
+    top: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 1200px;
+    z-index: 100;
+    border-radius: var(--radius-full);
+    transition: var(--transition-normal);
+  }
+
+  .header.scrolled {
+    top: 0.5rem;
+    width: 95%;
+    background: rgba(255, 255, 255, 0.85);
+    border-color: rgba(255, 255, 255, 0.6);
+  }
+
+  .nav-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 4.5rem;
+    padding: 0 1.5rem;
+  }
+
+  /* Logo styling */
+  .logo {
+    display: flex;
+    flex-direction: column;
+    font-family: var(--font-serif);
+    font-weight: 700;
+    font-size: 1.5rem;
+    letter-spacing: 1px;
+    color: var(--forest-deep);
+    line-height: 1;
+  }
+
+  .logo-accent {
+    color: var(--forest);
+    font-style: italic;
+  }
+
+  .logo-sub {
+    font-family: var(--font-sans);
+    font-size: 0.6rem;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+
+  /* Desktop links */
+  .nav-desktop {
+    display: none;
+    align-items: center;
+    gap: var(--spacing-md);
+  }
+
+  .nav-link {
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text-dark);
+    position: relative;
+    padding: 0.5rem 0.2rem;
+  }
+
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--sage);
+    transition: var(--transition-fast);
+  }
+
+  .nav-link:hover::after {
+    width: 100%;
+  }
+
+  .btn-sm-nav {
+    padding: 0.6rem 1.4rem;
+    font-size: 0.85rem;
+  }
+
+  /* Hamburger Menu Toggle Button */
+  .burger {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 1.8rem;
+    height: 1.2rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 110;
+  }
+
+  .burger-line {
+    width: 100%;
+    height: 2px;
+    background-color: var(--forest-deep);
+    transition: var(--transition-normal);
+    transform-origin: left center;
+  }
+
+  /* Hamburger Active Animation */
+  .burger.active .burger-line:nth-child(1) {
+    transform: rotate(45deg);
+    position: relative;
+    top: -1px;
+    left: 2px;
+  }
+
+  .burger.active .burger-line:nth-child(2) {
+    width: 0%;
+    opacity: 0;
+  }
+
+  .burger.active .burger-line:nth-child(3) {
+    transform: rotate(-45deg);
+    position: relative;
+    top: 1px;
+    left: 2px;
+  }
+
+  /* Mobile menu drawer */
+  .mobile-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    margin-top: 0.5rem;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    transform: translateY(-20px);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform var(--transition-normal), opacity var(--transition-normal);
+  }
+
+  .mobile-menu.active {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .nav-mobile-links {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .mobile-link {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--forest-deep);
+    padding: 0.5rem 0;
+    border-bottom: 1px solid oklch(0% 0 0 / 5%);
+  }
+
+  .mobile-cta {
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+
+  @media (min-width: 900px) {
+    .nav-desktop {
+      display: flex;
+    }
+
+    .burger {
+      display: none;
+    }
+
+    .mobile-menu {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  const burgerToggle = document.getElementById('burger-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const mobileLinks = document.querySelectorAll('.mobile-link, .mobile-cta');
+  const navbar = document.getElementById('navbar');
+
+  if (burgerToggle && mobileMenu) {
+    // Toggle active state
+    burgerToggle.addEventListener('click', () => {
+      const isExpanded = burgerToggle.getAttribute('aria-expanded') === 'true';
+      burgerToggle.setAttribute('aria-expanded', !isExpanded ? 'true' : 'false');
+      burgerToggle.classList.toggle('active');
+      mobileMenu.classList.toggle('active');
+    });
+
+    // Close menu when clicking on a link
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        burgerToggle.setAttribute('aria-expanded', 'false');
+        burgerToggle.classList.remove('active');
+        mobileMenu.classList.remove('active');
+      });
+    });
+  }
+
+  // Scroll effect on Navbar
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+      navbar?.classList.add('scrolled');
+    } else {
+      navbar?.classList.remove('scrolled');
+    }
+  });
+</script>

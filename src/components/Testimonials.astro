@@ -1,0 +1,297 @@
+---
+// Testimonials.astro
+
+const testimonials = [
+  {
+    id: 1,
+    quote: "La asesoría de GREEMETS para nuestra huella de carbono fue impecable. No solo obtuvimos el cálculo verificado con rigurosidad, sino que su plan de descarbonización nos permitió ahorrar costos de combustible. Un servicio con alto valor técnico y financiero.",
+    author: "Ing. Carlos Mendoza",
+    role: "Gerente de Operaciones",
+    company: "Conalimentos S.A.",
+    location: "Quito, Ecuador"
+  },
+  {
+    id: 2,
+    quote: "Implementar nuestro sistema integrado de gestión de seguridad industrial con GREEMETS transformó nuestra cultura preventiva. Su consultoría es muy humana y cercana, adaptándose perfectamente a nuestras realidades en territorio.",
+    author: "Dra. Andrea Peralta",
+    role: "Directora de Seguridad y Salud",
+    company: "Corporación Minera del Norte",
+    location: "Machala, El Oro"
+  },
+  {
+    id: 3,
+    quote: "El estudio de huella hídrica y su posterior certificación bajo la norma ISO 14046 superó nuestras expectativas. La propuesta técnica para la recirculación de agua redujo nuestro consumo y consolidó nuestra reputación verde.",
+    author: "Ing. Luis Fernando Espinosa",
+    role: "Coordinador de Sostenibilidad",
+    company: "Textiles del Sol",
+    location: "Guayaquil, Ecuador"
+  }
+];
+---
+
+<section class="section testimonials-section" id="testimonios">
+  <div class="container">
+    <div class="testimonials-header reveal">
+      <span class="section-tag">Testimonios</span>
+      <h2 class="testimonials-title">Opiniones de quienes <span class="accent-title">confían en nosotros</span></h2>
+    </div>
+
+    <!-- Testimonial Slider Container -->
+    <div class="slider-wrapper reveal" style="transition-delay: 0.2s;">
+      <div class="testimonials-slider">
+        {testimonials.map((t, idx) => (
+          <div class={`testimonial-slide ${idx === 0 ? 'slide-active' : ''}`} data-slide-idx={idx}>
+            <div class="quote-icon">“</div>
+            <p class="quote-text">{t.quote}</p>
+            <div class="author-info">
+              <span class="author-name">{t.author}</span>
+              <span class="author-title">{t.role} • <strong>{t.company}</strong></span>
+              <span class="author-location">{t.location}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Controls -->
+      <div class="slider-controls">
+        <button class="control-btn prev-btn" id="prev-slide" aria-label="Testimonio anterior">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </button>
+        
+        <!-- Pagination dots -->
+        <div class="slider-dots" id="slider-dots">
+          {testimonials.map((_, idx) => (
+            <button class={`dot-btn ${idx === 0 ? 'dot-active' : ''}`} data-dot-idx={idx} aria-label={`Ir al testimonio ${idx + 1}`}></button>
+          ))}
+        </div>
+
+        <button class="control-btn next-btn" id="next-slide" aria-label="Testimonio siguiente">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .testimonials-section {
+    background-color: var(--bone);
+    overflow: hidden;
+  }
+
+  .testimonials-header {
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .section-tag {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--sage);
+    display: inline-block;
+    margin-bottom: 0.5rem;
+  }
+
+  .accent-title {
+    font-family: var(--font-serif);
+    font-style: italic;
+    color: var(--forest);
+    font-weight: 400;
+  }
+
+  /* Slider Styling */
+  .slider-wrapper {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+    background: var(--cream);
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--sand);
+    padding: 3rem 1.5rem 2rem 1.5rem;
+    box-shadow: var(--shadow-sm);
+  }
+
+  @media (min-width: 768px) {
+    .slider-wrapper {
+      padding: 4rem 3rem 2.5rem 3rem;
+    }
+  }
+
+  .testimonials-slider {
+    position: relative;
+    min-height: 220px;
+    display: flex;
+    align-items: center;
+  }
+
+  .testimonial-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(30px);
+    transition: opacity 0.5s ease, transform 0.5s ease, visibility 0.5s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .testimonial-slide.slide-active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+    position: relative; /* Take up layout space */
+  }
+
+  .quote-icon {
+    font-family: var(--font-serif);
+    font-size: 5rem;
+    line-height: 1;
+    color: var(--sand);
+    opacity: 0.4;
+    height: 1.5rem;
+    margin-top: -2rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+  }
+
+  .quote-text {
+    font-family: var(--font-serif);
+    font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+    line-height: 1.6;
+    color: var(--forest-deep);
+    font-style: italic;
+    font-weight: 400;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .author-info {
+    display: flex;
+    flex-direction: column;
+    margin-top: auto;
+  }
+
+  .author-name {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--forest);
+  }
+
+  .author-title {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+
+  .author-title strong {
+    color: var(--forest-deep);
+  }
+
+  .author-location {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    opacity: 0.8;
+    margin-top: 2px;
+  }
+
+  /* Slider Controls */
+  .slider-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: var(--spacing-md);
+    border-top: 1px solid oklch(0% 0 0 / 5%);
+    padding-top: var(--spacing-md);
+  }
+
+  .control-btn {
+    background: transparent;
+    border: 1px solid var(--sand);
+    color: var(--forest-deep);
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: var(--radius-full);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition-fast);
+  }
+
+  .control-btn:hover {
+    background-color: var(--forest);
+    color: var(--bone);
+    border-color: var(--forest);
+  }
+
+  .slider-dots {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .dot-btn {
+    width: 8px;
+    height: 8px;
+    border-radius: var(--radius-full);
+    background-color: var(--sand-dark);
+    border: none;
+    cursor: pointer;
+    transition: var(--transition-fast);
+    padding: 0;
+  }
+
+  .dot-btn.dot-active {
+    background-color: var(--forest);
+    width: 20px;
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const slides = document.querySelectorAll('.testimonial-slide');
+    const dots = document.querySelectorAll('.dot-btn');
+    const prevBtn = document.getElementById('prev-slide');
+    const nextBtn = document.getElementById('next-slide');
+    
+    if (slides.length === 0) return;
+
+    let currentSlide = 0;
+    const totalSlides = slides.length;
+
+    const showSlide = (idx: number) => {
+      // Deactivate current slide
+      slides[currentSlide].classList.remove('slide-active');
+      dots[currentSlide].classList.remove('dot-active');
+
+      // Update index
+      currentSlide = (idx + totalSlides) % totalSlides;
+
+      // Activate new slide
+      slides[currentSlide].classList.add('slide-active');
+      dots[currentSlide].classList.add('dot-active');
+    };
+
+    // Controls listeners
+    prevBtn?.addEventListener('click', () => showSlide(currentSlide - 1));
+    nextBtn?.addEventListener('click', () => showSlide(currentSlide + 1));
+
+    // Dots listeners
+    dots.forEach((dot, idx) => {
+      dot.addEventListener('click', () => showSlide(idx));
+    });
+
+    // Auto rotate every 8 seconds
+    setInterval(() => {
+      showSlide(currentSlide + 1);
+    }, 8000);
+  });
+</script>

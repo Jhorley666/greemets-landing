@@ -1,0 +1,211 @@
+---
+// About.astro
+---
+
+<section class="section about-section" id="sobre-nosotros">
+  <div class="container">
+    <div class="about-grid">
+      <!-- Text Side (60%) -->
+      <div class="about-text-content reveal">
+        <span class="section-tag">Sobre Nosotros</span>
+        <h2 class="about-title">
+          Guiando a la industria hacia un modelo <span class="accent-title">sostenible y rentable</span>
+        </h2>
+        <div class="about-description">
+          <p class="lead-text">
+            En <strong>Green Metrics Solutions (GREEMETS)</strong>, creemos que la sostenibilidad no es una meta abstracta, sino el único camino de evolución viable para las empresas modernas.
+          </p>
+          <p>
+            Nacimos con la visión de transformar el compromiso ecológico en valor empresarial medible. Nos especializamos en proveer herramientas analíticas de precisión e ingeniería de mitigación, permitiendo a las organizaciones evaluar con exactitud su impacto ambiental y trazar rutas eficientes de descarbonización y regeneración hídrica.
+          </p>
+          <p>
+            Guiamos a corporaciones en todo el Ecuador y la región mediante la implementación de estándares internacionales (ISO) y rigurosas metodologías científicas. Nuestro enfoque combina solidez técnica con una profunda conciencia social y de seguridad ocupacional, asegurando operaciones ambientalmente responsables, económicamente prósperas y seguras.
+          </p>
+        </div>
+        
+        <div class="stats-row">
+          <div class="stat-card">
+            <span class="stat-number">100%</span>
+            <span class="stat-label">Rigurosidad Técnica</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number">ISO</span>
+            <span class="stat-label">Estándares Globales</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number">Ec</span>
+            <span class="stat-label">Presencia Nacional</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Image Side (40%) -->
+      <div class="about-image-content reveal" style="transition-delay: 0.2s;">
+        <div class="image-wrapper">
+          <img src={`${import.meta.env.BASE_URL}img/b001a277-4ced-4f26-a4eb-95e958c996d2.jpg`} alt="Equipo de GREEMETS realizando auditoría técnica ambiental" class="about-image" />
+          <div class="image-accent-border"></div>
+          <div class="experience-badge">
+            <span class="badge-num">GREEMETS</span>
+            <span class="badge-text">Soluciones Sostenibles</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about-section {
+    background-color: var(--bone);
+  }
+
+  .section-tag {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--sage);
+    display: inline-block;
+    margin-bottom: 0.5rem;
+  }
+
+  .about-title {
+    margin-bottom: var(--spacing-md);
+  }
+
+  .accent-title {
+    font-family: var(--font-serif);
+    font-style: italic;
+    color: var(--forest);
+    font-weight: 400;
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+    align-items: center;
+  }
+
+  .lead-text {
+    font-size: 1.15rem;
+    color: var(--forest-deep);
+    font-weight: 500;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .about-description p {
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-lg);
+    border-top: 1px solid oklch(0% 0 0 / 8%);
+    padding-top: var(--spacing-md);
+  }
+
+  .stat-card {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .stat-number {
+    font-family: var(--font-serif);
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--forest);
+  }
+
+  .stat-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 0.2rem;
+  }
+
+  /* Image Column Styling */
+  .about-image-content {
+    display: flex;
+    justify-content: center;
+    position: relative;
+  }
+
+  .image-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 420px;
+    border-radius: var(--radius-xl);
+    overflow: visible;
+  }
+
+  .about-image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-lg);
+    position: relative;
+    z-index: 2;
+  }
+
+  .image-accent-border {
+    position: absolute;
+    top: -12px;
+    right: -12px;
+    width: 100%;
+    height: 100%;
+    border: 2px solid var(--sand);
+    border-radius: var(--radius-xl);
+    z-index: 1;
+    pointer-events: none;
+    transition: var(--transition-slow);
+  }
+
+  .image-wrapper:hover .image-accent-border {
+    transform: translate(-6px, 6px);
+    border-color: var(--forest);
+  }
+
+  .experience-badge {
+    position: absolute;
+    bottom: -20px;
+    left: -20px;
+    background-color: var(--forest-deep);
+    color: var(--bone);
+    padding: 1rem 1.5rem;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .badge-num {
+    font-family: var(--font-serif);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 1px;
+  }
+
+  .badge-text {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--sage-light);
+    margin-top: 2px;
+  }
+
+  @media (min-width: 1024px) {
+    .about-grid {
+      grid-template-columns: 3fr 2fr;
+      gap: var(--spacing-xl);
+    }
+  }
+</style>

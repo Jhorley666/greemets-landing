@@ -1,0 +1,221 @@
+---
+// Hero.astro
+---
+
+<section class="hero-section" id="inicio">
+  <!-- Background with overlay -->
+  <div class="hero-bg-container" style={`background-image: url('${import.meta.env.BASE_URL}img/hero.jpg');`}>
+    <div class="hero-overlay"></div>
+  </div>
+
+  <div class="container hero-content">
+    <div class="hero-text-block">
+      <h1 class="hero-title reveal">
+        Medimos lo que realmente importa para construir un <span class="accent-serif">futuro sostenible</span>
+      </h1>
+      <p class="hero-subtitle reveal" style="transition-delay: 0.2s;">
+        Especialistas en descarbonización, medición de huella ecológica, consultoría y certificación ambiental integral.
+      </p>
+      
+      <div class="hero-actions reveal" style="transition-delay: 0.4s;">
+        <a href="#contacto" class="btn btn-accent btn-hero">Hablar con un experto</a>
+        <a href="#servicios" class="btn btn-secondary btn-hero-secondary">Ver Servicios</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll Down Indicator (Positioned safely below CTAs) -->
+  <div class="scroll-indicator-container">
+    <a href="#sobre-nosotros" aria-label="Desplazarse hacia abajo" class="scroll-indicator">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="12" y1="5" x2="12" y2="19"></line>
+        <polyline points="19 12 12 19 5 12"></polyline>
+      </svg>
+      <span class="scroll-text">Descubrir</span>
+    </a>
+  </div>
+
+  <!-- Organic Bottom Transition SVG Wave -->
+  <div class="hero-divider">
+    <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+      <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V30.28C1126.31,52.45,1064.65,110.87,985.66,92.83Z" class="divider-fill"></path>
+    </svg>
+  </div>
+</section>
+
+<style>
+  .hero-section {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-light);
+    overflow: hidden;
+    padding-top: 6rem;
+    padding-bottom: 8rem;
+  }
+
+  .hero-bg-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    z-index: -2;
+  }
+
+  .hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      180deg,
+      rgba(10, 61, 42, 0.8) 0%,
+      rgba(10, 61, 42, 0.9) 60%,
+      rgba(10, 61, 42, 0.95) 100%
+    );
+    z-index: -1;
+  }
+
+  .hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    z-index: 10;
+  }
+
+  .hero-text-block {
+    max-width: 850px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero-title {
+    color: var(--bone);
+    font-size: clamp(2rem, 6vw, 4rem);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.15;
+    font-weight: 700;
+  }
+
+  .accent-serif {
+    font-family: var(--font-serif);
+    font-style: italic;
+    color: var(--accent);
+    font-weight: 400;
+  }
+
+  .hero-subtitle {
+    font-size: clamp(1rem, 2.5vw, 1.35rem);
+    color: var(--sage-light);
+    margin-bottom: var(--spacing-lg);
+    line-height: 1.5;
+    font-weight: 400;
+    max-width: 600px;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+    justify-content: center;
+    width: 100%;
+  }
+
+  .btn-hero {
+    box-shadow: 0 4px 20px oklch(82% 0.11 82 / 30%);
+  }
+
+  .btn-hero-secondary {
+    border-color: rgba(255, 255, 255, 0.4);
+    color: var(--bone);
+  }
+
+  .btn-hero-secondary:hover {
+    border-color: var(--bone);
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  /* Scroll Indicator Container - Positioned at bottom with plenty of spacing */
+  .scroll-indicator-container {
+    position: absolute;
+    bottom: 3.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 20;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .scroll-indicator {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--sage-light);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    opacity: 0.8;
+    transition: opacity var(--transition-fast);
+  }
+
+  .scroll-indicator:hover {
+    opacity: 1;
+    color: var(--accent);
+  }
+
+  .scroll-text {
+    font-family: var(--font-sans);
+  }
+
+  /* SVG Bottom Divider */
+  .hero-divider {
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    transform: rotate(180deg);
+    z-index: 5;
+  }
+
+  .hero-divider svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1.3px);
+    height: 60px;
+  }
+
+  .hero-divider .divider-fill {
+    fill: var(--bone);
+  }
+
+  @media (max-height: 700px) {
+    .hero-section {
+      min-height: auto;
+      padding-bottom: 6rem;
+    }
+    .scroll-indicator-container {
+      display: none; /* Hide if screen height is extremely small to prevent clutter */
+    }
+  }
+
+  @media (min-width: 768px) {
+    .hero-divider svg {
+      height: 90px;
+    }
+  }
+</style>

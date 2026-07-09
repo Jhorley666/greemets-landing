@@ -1,0 +1,585 @@
+---
+// Projects.astro
+
+const projects = [
+  {
+    id: "proy-1",
+    title: "Descarbonización en Planta Alimenticia",
+    client: "Confiteca S.A.",
+    location: "Quito, Pichincha",
+    shortDesc: "Auditoría de gases de efecto invernadero e implementación de quemadores eficientes en caldera.",
+    fullDesc: "Realizamos la auditoría completa de emisiones de Alcance 1 y 2 bajo la norma ISO 14064. Identificamos que las calderas de generación de vapor representaban el 65% del total de emisiones de combustión directa. Diseñamos e implementamos un plan de modernización de quemadores industriales con control de oxígeno y precalentadores de aire de combustión.",
+    image: "/img/20161020_094141.jpg",
+    metrics: [
+      { value: "1,250 T", label: "CO₂ Reducido/Año" },
+      { value: "15%", label: "Ahorro Combustible" }
+    ],
+    duration: "6 Meses",
+    scope: "Alcance 1 y 2, ISO 14064-1"
+  },
+  {
+    id: "proy-2",
+    title: "Eficiencia Hídrica en Sector Florícola",
+    client: "Exportadora RoseLux",
+    location: "Cayambe, Pichincha",
+    shortDesc: "Cálculo y certificación de huella hídrica con rediseño del sistema de riego por goteo y recirculación.",
+    fullDesc: "Evaluamos los perfiles de consumo de agua (Huella azul, verde y gris) en un cultivo de rosas de exportación de 40 hectáreas siguiendo la metodología ISO 14046. A partir del diagnóstico, implementamos un sistema automatizado de pulso de riego por goteo y un canal de drenaje para recirculación de lixiviados en el sustrato.",
+    image: "/img/IMG_0288.JPG",
+    metrics: [
+      { value: "45,000 m³", label: "Agua Ahorrada/Año" },
+      { value: "98%", label: "Eficiencia de Riego" }
+    ],
+    duration: "8 Meses",
+    scope: "Huella Hídrica, ISO 14046"
+  },
+  {
+    id: "proy-3",
+    title: "Mitigación de Metano en Sector Gas y Petróleo",
+    client: "Oleoducto Andino",
+    location: "Lago Agrio, Sucumbíos",
+    shortDesc: "Diagnóstico de línea base y detección LDAR de emisiones fugitivas en válvulas y tanques.",
+    fullDesc: "Desplegamos equipos ópticos de termografía infrarroja (OGI) y analizadores portátiles para el mapeo, detección y cuantificación de emisiones fugitivas de metano en estaciones de bombeo de petróleo crudo. Diseñamos un programa sistemático de detección y reparación de fugas (LDAR) y capacitamos a las brigadas internas de mantenimiento.",
+    image: "/img/20251008_094943.jpg",
+    metrics: [
+      { value: "340 Ton", label: "CH₄ Fugitiva Eliminada" },
+      { value: "100%", label: "Válvulas Críticas Reparadas" }
+    ],
+    duration: "4 Meses",
+    scope: "Línea Base Metano, Programa LDAR"
+  },
+  {
+    id: "proy-4",
+    title: "Gestión de Energía ISO 50001",
+    client: "Aceros del Pacífico",
+    location: "Guayaquil, Guayas",
+    shortDesc: "Auditoría energética integral y diseño de indicadores de desempeño en planta metalúrgica.",
+    fullDesc: "Diseñamos e implementamos el Sistema de Gestión de Energía (SGEn) bajo la norma ISO 50001 en una planta metalúrgica de fundición de acero. Se establecieron líneas base de energía vinculando el consumo con las variables operativas críticas de producción. Se optimizó el control en hornos de arco eléctrico y se automatizaron compresores de aire.",
+    image: "/img/IMG_0088.JPG",
+    metrics: [
+      { value: "8%", label: "Ahorro Eléctrico Global" },
+      { value: "1.8 Años", label: "Retorno de Inversión" }
+    ],
+    duration: "12 Meses",
+    scope: "Gestión Energética, ISO 50001"
+  }
+];
+---
+
+<section class="section projects-section" id="casos">
+  <div class="container">
+    <div class="projects-header reveal">
+      <span class="section-tag">Casos de Éxito</span>
+      <h2 class="projects-title">Impacto real en la <span class="accent-title">industria ecuatoriana</span></h2>
+      <p class="projects-subtitle">
+        Conozca cómo ayudamos a nuestros clientes a optimizar recursos, mitigar emisiones y obtener certificaciones globales mediante soluciones basadas en ingeniería y ciencia de datos.
+      </p>
+    </div>
+
+    <!-- Case Studies Grid -->
+    <div class="projects-grid">
+      {projects.map((project, idx) => (
+        <div class="project-card reveal" style={`transition-delay: ${idx * 0.1}s;`} data-project-id={project.id}>
+          <div class="project-img-wrapper">
+            <img src={`${import.meta.env.BASE_URL}${project.image.replace(/^\//, '')}`} alt={project.title} class="project-card-image" />
+            <div class="project-card-overlay">
+              <span class="project-tag-badge">{project.scope}</span>
+            </div>
+          </div>
+          <div class="project-card-body">
+            <span class="project-client">{project.client} • {project.location}</span>
+            <h3 class="project-card-title">{project.title}</h3>
+            <p class="project-card-desc">{project.shortDesc}</p>
+            
+            <button class="project-btn-detail" data-open-modal={project.id}>
+              Ver impacto y detalles
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </button>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- Modals using Native HTML5 <dialog> -->
+  {projects.map(project => (
+    <dialog class="project-dialog" id={`dialog-${project.id}`}>
+      <div class="dialog-content glass">
+        <!-- Close button -->
+        <button class="dialog-close" data-close-modal={project.id} aria-label="Cerrar modal">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+
+        <div class="dialog-grid">
+          <!-- Left side: Image and metrics -->
+          <div class="dialog-visual">
+            <img src={`${import.meta.env.BASE_URL}${project.image.replace(/^\//, '')}`} alt={project.title} class="dialog-image" />
+            <div class="dialog-metrics">
+              {project.metrics.map(metric => (
+                <div class="dialog-metric-box">
+                  <span class="metric-val">{metric.value}</span>
+                  <span class="metric-lbl">{metric.label}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <!-- Right side: Text details -->
+          <div class="dialog-text">
+            <span class="dialog-meta">{project.client} • {project.location}</span>
+            <h3 class="dialog-title">{project.title}</h3>
+            <div class="dialog-divider"></div>
+            
+            <div class="dialog-body-text">
+              <h4>Descripción del Proyecto</h4>
+              <p>{project.fullDesc}</p>
+              
+              <div class="dialog-details-list">
+                <div class="detail-item">
+                  <strong>Ámbito de Aplicación:</strong>
+                  <span>{project.scope}</span>
+                </div>
+                <div class="detail-item">
+                  <strong>Duración del Proyecto:</strong>
+                  <span>{project.duration}</span>
+                </div>
+              </div>
+            </div>
+
+            <a href="#contacto" class="btn btn-primary dialog-cta" data-close-modal={project.id}>
+              Quiero un diagnóstico similar
+            </a>
+          </div>
+        </div>
+      </div>
+    </dialog>
+  ))}
+</section>
+
+<style>
+  .projects-section {
+    background-color: var(--bone);
+  }
+
+  .projects-header {
+    text-align: center;
+    max-width: 750px;
+    margin: 0 auto var(--spacing-xl) auto;
+  }
+
+  .projects-subtitle {
+    margin: 0 auto;
+    font-size: 1.1rem;
+  }
+
+  .section-tag {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--sage);
+    display: inline-block;
+    margin-bottom: 0.5rem;
+  }
+
+  .accent-title {
+    font-family: var(--font-serif);
+    font-style: italic;
+    color: var(--forest);
+    font-weight: 400;
+  }
+
+  /* Projects Masonry/Asymmetric Grid */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+  }
+
+  @media (min-width: 768px) {
+    .projects-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  /* Project Card styling */
+  .project-card {
+    background: var(--bone);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid oklch(0% 0 0 / 5%);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+  }
+
+  .project-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .project-img-wrapper {
+    position: relative;
+    width: 100%;
+    height: 240px;
+    overflow: hidden;
+  }
+
+  .project-card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-slow);
+  }
+
+  .project-card:hover .project-card-image {
+    transform: scale(1.08);
+  }
+
+  .project-card-overlay {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    z-index: 5;
+  }
+
+  .project-tag-badge {
+    background-color: var(--forest-deep);
+    color: var(--accent);
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 0.4rem 0.8rem;
+    border-radius: var(--radius-full);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .project-card-body {
+    padding: var(--spacing-md);
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
+  .project-client {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  .project-card-title {
+    font-size: 1.2rem;
+    color: var(--forest-deep);
+    margin-bottom: 0.5rem;
+    line-height: 1.3;
+  }
+
+  .project-card-desc {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+    margin-bottom: var(--spacing-md);
+    flex-grow: 1;
+  }
+
+  .project-btn-detail {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--forest);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.2rem 0;
+    align-self: start;
+    transition: color var(--transition-fast);
+  }
+
+  .project-btn-detail svg {
+    transition: transform var(--transition-fast);
+  }
+
+  .project-card:hover .project-btn-detail {
+    color: var(--sage);
+  }
+
+  .project-card:hover .project-btn-detail svg {
+    transform: translateX(4px);
+  }
+
+  /* --- NATIVE DIALOG MODAL STYLING --- */
+  .project-dialog {
+    border: none;
+    border-radius: var(--radius-xl);
+    padding: 0;
+    background: transparent;
+    max-width: 900px;
+    width: 90%;
+    box-shadow: var(--shadow-lg);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.9);
+    opacity: 0;
+    transition: transform var(--transition-slow), opacity var(--transition-slow);
+  }
+
+  .project-dialog[open] {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+
+  /* Polyfill/browser helper for Backdrop */
+  .project-dialog::backdrop {
+    background-color: oklch(20% 0.05 162 / 70%);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    opacity: 0;
+    transition: opacity var(--transition-normal);
+  }
+
+  .project-dialog[open]::backdrop {
+    opacity: 1;
+  }
+
+  .dialog-content {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: var(--radius-xl);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    padding: 2.5rem 1.5rem 1.5rem 1.5rem;
+    position: relative;
+    outline: none;
+  }
+
+  @media (min-width: 768px) {
+    .dialog-content {
+      padding: 3rem;
+    }
+  }
+
+  .dialog-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: oklch(0% 0 0 / 5%);
+    border: none;
+    border-radius: var(--radius-full);
+    width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--forest-deep);
+    transition: background var(--transition-fast), transform var(--transition-fast);
+    z-index: 10;
+  }
+
+  .dialog-close:hover {
+    background: oklch(0% 0 0 / 10%);
+    transform: scale(1.05);
+  }
+
+  .dialog-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+  }
+
+  @media (min-width: 768px) {
+    .dialog-grid {
+      grid-template-columns: 1fr 1fr;
+      align-items: start;
+    }
+  }
+
+  /* Left column: Visuals & Metrics */
+  .dialog-visual {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+  }
+
+  .dialog-image {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+  }
+
+  @media (min-width: 768px) {
+    .dialog-image {
+      height: 300px;
+    }
+  }
+
+  .dialog-metrics {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-sm);
+  }
+
+  .dialog-metric-box {
+    background: var(--forest-deep);
+    border-radius: var(--radius-md);
+    padding: 1.25rem 1rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .metric-val {
+    font-family: var(--font-serif);
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1.1;
+  }
+
+  .metric-lbl {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--sage-light);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 0.3rem;
+  }
+
+  /* Right column: Content */
+  .dialog-text {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .dialog-meta {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--text-muted);
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+  }
+
+  .dialog-title {
+    font-size: clamp(1.4rem, 3vw, 1.8rem);
+    color: var(--forest-deep);
+    margin-bottom: 0.75rem;
+  }
+
+  .dialog-divider {
+    height: 2px;
+    background-color: var(--sand);
+    width: 60px;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .dialog-body-text h4 {
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--forest);
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  .dialog-body-text p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--text-muted);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .dialog-details-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: var(--spacing-lg);
+    background: oklch(0% 0 0 / 2%);
+    padding: 1rem;
+    border-radius: var(--radius-sm);
+  }
+
+  .detail-item {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.88rem;
+  }
+
+  .detail-item strong {
+    color: var(--forest-deep);
+  }
+
+  .detail-item span {
+    color: var(--text-muted);
+  }
+
+  .dialog-cta {
+    margin-top: auto;
+    width: 100%;
+  }
+</style>
+
+<script>
+  // Setup Dialog Modal Open/Close Logic
+  const openButtons = document.querySelectorAll('[data-open-modal]');
+  const closeButtons = document.querySelectorAll('[data-close-modal]');
+
+  // Open modal
+  openButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = btn.getAttribute('data-open-modal');
+      const dialog = document.getElementById(`dialog-${id}`) as HTMLDialogElement | null;
+      if (dialog) {
+        dialog.showModal();
+        document.body.style.overflow = 'hidden'; // Disable scroll under modal
+      }
+    });
+  });
+
+  // Close modal
+  closeButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = btn.getAttribute('data-close-modal');
+      const dialog = document.getElementById(`dialog-${id}`) as HTMLDialogElement | null;
+      if (dialog) {
+        dialog.close();
+        document.body.style.overflow = ''; // Re-enable scroll
+      }
+    });
+  });
+
+  // Close modal by clicking backdrop
+  const dialogs = document.querySelectorAll('.project-dialog');
+  dialogs.forEach(dialog => {
+    dialog.addEventListener('click', (e) => {
+      const rect = dialog.getBoundingClientRect();
+      const isInDialog = (
+        rect.top <= e.clientY && e.clientY <= rect.top + rect.height &&
+        rect.left <= e.clientX && e.clientX <= rect.left + rect.width
+      );
+      if (!isInDialog) {
+        (dialog as HTMLDialogElement).close();
+        document.body.style.overflow = '';
+      }
+    });
+  });
+</script>
