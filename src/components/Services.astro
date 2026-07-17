@@ -9,6 +9,7 @@ const services = [
     description: "Medición cuantitativa precisa de las huellas de carbono (CO₂) e hídrica (H₂O) de su organización, productos o eventos, junto con planes integrales de mitigación y descarbonización.",
     details: "Implementamos las directrices del GHG Protocol, ISO 14064 e ISO 14046. Identificamos puntos críticos de emisión en su cadena de valor y diseñamos un plan de transición energética y eficiencia para reducir costos operativos y mitigar impactos.",
     icon: Leaf,
+    image: "/img/20161020_094141.jpg",
     featured: true
   },
   {
@@ -17,6 +18,7 @@ const services = [
     description: "Soporte técnico y auditoría para la certificación formal de su huella de carbono, validando la veracidad de sus esfuerzos ante reguladores y mercados internacionales.",
     details: "Le acompañamos durante todo el proceso de verificación por parte de organismos de certificación acreditados. Aseguramos que la declaración de conformidad cumpla con los estándares más estrictos, otorgándole un sello verde confiable.",
     icon: Award,
+    image: "/img/20161020_094143.jpg",
     featured: false
   },
   {
@@ -25,6 +27,7 @@ const services = [
     description: "Acompañamiento especializado para obtener certificaciones oficiales en la gestión del agua y el uso eficiente del recurso hídrico corporativo.",
     details: "Validamos su inventario de huella hídrica y sus planes de neutralidad hídrica o eficiencia en base a la norma ISO 14046. Obtenga una ventaja competitiva demostrando un uso transparente y responsable del agua.",
     icon: Droplet,
+    image: "/img/IMG_0288.JPG",
     featured: false
   },
   {
@@ -33,6 +36,7 @@ const services = [
     description: "Detección, cuantificación y verificación independiente de emisiones fugitivas de metano (CH₄) en sectores industriales y energéticos.",
     details: "El metano tiene un potencial de calentamiento global hasta 28 veces superior al CO₂. Proveemos verificación experta para asegurar el reporte preciso y la efectividad de sus programas de control de fugas (LDAR).",
     icon: Wind,
+    image: "/img/20251008_094943.jpg",
     featured: false
   },
   {
@@ -41,6 +45,7 @@ const services = [
     description: "Estudios diagnósticos para establecer la línea base de emisiones de metano en sus instalaciones y definir estrategias realistas de mitigación.",
     details: "Determinamos la línea de partida cuantitativa de las fuentes emisoras de metano en sus operaciones. Desarrollamos planes de acción para implementar mejores prácticas operativas y tecnologías de bajas emisiones.",
     icon: LineChart,
+    image: "/img/20251008_094944.jpg",
     featured: false
   },
   {
@@ -49,6 +54,7 @@ const services = [
     description: "Diseño y estructuración de planes de prevención de riesgos laborales, salud ocupacional y cumplimiento de la legislación de seguridad industrial.",
     details: "Evaluamos los riesgos laborales de sus operaciones y estructuramos reglamentos internos de higiene y seguridad, planes de emergencia, capacitación a brigadas y seguimiento médico ocupacional preventivo.",
     icon: ShieldCheck,
+    image: "/img/IMG_0354.JPG",
     featured: false
   },
   {
@@ -57,6 +63,7 @@ const services = [
     description: "Asesoría para el levantamiento, auditoría interna e implementación de sistemas integrados de gestión bajo estándares de calidad, ambiente, seguridad y energía.",
     details: "Diseñamos sistemas prácticos e integrados que optimizan procesos: Calidad (ISO 9001), Gestión Ambiental (ISO 14001), Seguridad y Salud Ocupacional (ISO 45001) y Eficiencia Energética (ISO 50001).",
     icon: ClipboardCheck,
+    image: "/img/IMG_0088.JPG",
     featured: true
   }
 ];
@@ -78,6 +85,9 @@ const services = [
         const IconComponent = service.icon;
         return (
           <div class={`service-card reveal ${service.featured ? 'card-featured' : ''}`}>
+            <div class="service-card-img-wrapper">
+              <img src={`${import.meta.env.BASE_URL}/${service.image.replace(/^\//, '')}`} alt={service.title} class="service-card-img" loading="lazy" />
+            </div>
             <div class="card-inner">
               <div class="icon-container">
                 <IconComponent class="service-icon" />
@@ -145,7 +155,7 @@ const services = [
   .service-card {
     background: var(--bone);
     border-radius: var(--radius-lg);
-    padding: var(--spacing-md);
+    padding: 0;
     position: relative;
     overflow: hidden;
     box-shadow: var(--shadow-sm);
@@ -157,11 +167,43 @@ const services = [
     border: 1px solid oklch(0% 0 0 / 3%);
   }
 
+  /* Service card image */
+  .service-card-img-wrapper {
+    position: relative;
+    width: 100%;
+    height: 180px;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+
+  .service-card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-slow);
+  }
+
+  .service-card:hover .service-card-img {
+    transform: scale(1.08);
+  }
+
+  .service-card-img-wrapper::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 40%;
+    background: linear-gradient(to top, var(--bone), transparent);
+    pointer-events: none;
+  }
+
   .card-inner {
     display: flex;
     flex-direction: column;
     height: 100%;
     z-index: 5;
+    padding: var(--spacing-md);
   }
 
   .icon-container {
