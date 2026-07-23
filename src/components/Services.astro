@@ -1,52 +1,51 @@
 ---
-import { Leaf, Wind, LineChart, ShieldCheck, ClipboardCheck } from '@lucide/astro';
+import { Leaf, Wind, LineChart, ShieldCheck } from '@lucide/astro';
 
 // Services list
 const services = [
   {
     id: 1,
-    title: "Cálculo de Huella de Carbono, Hídrica y Descarbonización",
-    description: "Medición cuantitativa precisa de las huellas de carbono (CO₂) e hídrica (H₂O) de su organización, productos o eventos, junto con planes integrales de mitigación y descarbonización.",
-    details: "Implementamos las directrices del GHG Protocol, ISO 14064 e ISO 14046. Identificamos puntos críticos de emisión en su cadena de valor y diseñamos un plan de transición energética y eficiencia para reducir costos operativos y mitigar impactos.",
-    icon: Leaf,
+    title: "Análisis de Riesgos Laborales",
+    description:
+      "Protegemos lo más importante de su organización: su gente y sus operaciones mediante servicios especializados en análisis de riesgos laborales y evaluación de la infraestructura de los sistemas de gestión en seguridad industrial.",
+    details:
+      "Identificamos peligros, minimizamos riesgos y fortalecemos la prevención para garantizar entornos de trabajo seguros, eficientes y en cumplimiento con la normativa vigente.",
+    icon: ShieldCheck,
     image: "/img/20161020_094141.jpg",
     featured: true
   },
   {
     id: 2,
-    title: "Verificación de Emisiones de Metano",
-    description: "Detección, cuantificación y verificación independiente de emisiones fugitivas de metano (CH₄) en sectores industriales y energéticos.",
-    details: "El metano tiene un potencial de calentamiento global hasta 28 veces superior al CO₂. Proveemos verificación experta para asegurar el reporte preciso y la efectividad de sus programas de control de fugas (LDAR).",
+    title: "Mitigación de Emisiones de Metano",
+    description:
+      "Ayudamos a las empresas del sector de petróleo y gas a reducir sus emisiones de metano mediante la implementación de programas de Detección y Reparación de Fugas (LDAR).",
+    details:
+      "Aplicamos tecnologías avanzadas para identificar, cuantificar y gestionar emisiones fugitivas en instalaciones de producción, procesamiento, transporte y almacenamiento de hidrocarburos.",
     icon: Wind,
     image: "/img/20251008_094943.jpg",
     featured: false
   },
   {
     id: 3,
-    title: "Consultoría de Línea Base de Emisiones de Metano",
-    description: "Estudios diagnósticos para establecer la línea base de emisiones de metano en sus instalaciones y definir estrategias realistas de mitigación.",
-    details: "Determinamos la línea de partida cuantitativa de las fuentes emisoras de metano en sus operaciones. Desarrollamos planes de acción para implementar mejores prácticas operativas y tecnologías de bajas emisiones.",
-    icon: LineChart,
-    image: "/img/20251008_094944.jpg",
-    featured: false
+    title: "Huella de Carbono y Plan de Descarbonización",
+    description:
+      "Acompañamos a las organizaciones en la medición, gestión y reducción de su impacto climático mediante el cálculo de la huella de carbono corporativa y el desarrollo de estrategias de descarbonización.",
+    details:
+      "Cuantificamos las emisiones de gases de efecto invernadero, identificamos las principales fuentes de emisión y diseñamos planes de acción personalizados para reducirlas de manera eficiente y sostenible. Nuestros servicios permiten fortalecer el desempeño ambiental, cumplir con estándares y compromisos climáticos, y avanzar hacia operaciones más competitivas y bajas en carbono.",
+    icon: Leaf,
+    image: "/img/IMG_0088.JPG",
+    featured: true
   },
   {
     id: 4,
-    title: "Consultoría en Seguridad Industrial y Salud Ocupacional",
-    description: "Diseño y estructuración de planes de prevención de riesgos laborales, salud ocupacional y cumplimiento de la legislación de seguridad industrial.",
-    details: "Evaluamos los riesgos laborales de sus operaciones y estructuramos reglamentos internos de higiene y seguridad, planes de emergencia, capacitación a brigadas y seguimiento médico ocupacional preventivo.",
-    icon: ShieldCheck,
-    image: "/img/IMG_0354.JPG",
+    title: "Consultoría en Eficiencia Energética",
+    description:
+      "Ayudamos a las organizaciones a optimizar el uso de la energía y reducir sus costos operativos mediante la identificación de oportunidades de mejora en sus procesos e instalaciones.",
+    details:
+      "Realizamos diagnósticos energéticos, análisis de consumos y evaluación de medidas de eficiencia que permiten incrementar la productividad, disminuir el desperdicio energético y reducir las emisiones asociadas al consumo de energía. Nuestras soluciones fortalecen la competitividad y contribuyen a los objetivos de sostenibilidad y descarbonización.",
+    icon: LineChart,
+    image: "/img/IMG_0299.JPG",
     featured: false
-  },
-  {
-    id: 5,
-    title: "Sistemas de Gestión ISO (9001, 14001, 45001, 50001)",
-    description: "Asesoría para el levantamiento, auditoría interna e implementación de sistemas integrados de gestión bajo estándares de calidad, ambiente, seguridad y energía.",
-    details: "Diseñamos sistemas prácticos e integrados que optimizan procesos: Calidad (ISO 9001), Gestión Ambiental (ISO 14001), Seguridad y Salud Ocupacional (ISO 45001) y Eficiencia Energética (ISO 50001).",
-    icon: ClipboardCheck,
-    image: "/img/IMG_0088.JPG",
-    featured: true
   }
 ];
 ---
@@ -55,34 +54,48 @@ const services = [
   <div class="container">
     <div class="services-header reveal">
       <span class="section-tag">Nuestros Servicios</span>
-      <h2 class="services-title">Ingeniería y consultoría especializada de <span class="accent-title">alto nivel</span></h2>
+      <h2 class="services-title">
+        Ingeniería y consultoría especializada de
+        <span class="accent-title">alto nivel</span>
+      </h2>
       <p class="services-subtitle">
         Ofrecemos soluciones ambientales, energéticas y de seguridad industrial con rigor científico, alineadas con los más altos estándares globales para impulsar la rentabilidad sostenible.
       </p>
     </div>
 
-    <!-- Asymmetric Grid System -->
     <div class="services-grid">
       {services.map(service => {
         const IconComponent = service.icon;
         return (
           <div class={`service-card reveal ${service.featured ? 'card-featured' : ''}`}>
             <div class="service-card-img-wrapper">
-              <img src={`${import.meta.env.BASE_URL}/${service.image.replace(/^\//, '')}`} alt={service.title} class="service-card-img" loading="lazy" />
+              <img
+                src={`${import.meta.env.BASE_URL}/${service.image.replace(/^\//, '')}`}
+                alt={service.title}
+                class="service-card-img"
+                loading="lazy"
+              />
             </div>
+
             <div class="card-inner">
               <div class="icon-container">
                 <IconComponent class="service-icon" />
               </div>
+
               <h3 class="service-card-title">{service.title}</h3>
-              <p class="service-card-desc">{service.description}</p>
-              
-              <!-- Hover Extended Details -->
+
+              <p class="service-card-desc">
+                {service.description}
+              </p>
+
               <div class="service-card-details">
                 <div class="details-divider"></div>
-                <p class="details-text">{service.details}</p>
+                <p class="details-text">
+                  {service.details}
+                </p>
               </div>
             </div>
+
             <div class="card-border-gradient"></div>
           </div>
         );
@@ -126,14 +139,12 @@ const services = [
     font-weight: 400;
   }
 
-  /* Asymmetric Masonry-Like CSS Grid */
   .services-grid {
     display: grid;
     grid-template-columns: 1fr;
     gap: var(--spacing-md);
   }
 
-  /* Service Card styling */
   .service-card {
     background: var(--bone);
     border-radius: var(--radius-lg);
@@ -142,20 +153,16 @@ const services = [
     overflow: hidden;
     box-shadow: var(--shadow-sm);
     transition: transform var(--transition-normal), box-shadow var(--transition-normal);
-    cursor: default;
     display: flex;
     flex-direction: column;
-    z-index: 1;
     border: 1px solid oklch(0% 0 0 / 3%);
   }
 
-  /* Service card image */
   .service-card-img-wrapper {
     position: relative;
     width: 100%;
     height: 180px;
     overflow: hidden;
-    flex-shrink: 0;
   }
 
   .service-card-img {
@@ -172,36 +179,32 @@ const services = [
   .service-card-img-wrapper::after {
     content: '';
     position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
+    inset: auto 0 0 0;
     height: 40%;
     background: linear-gradient(to top, var(--bone), transparent);
-    pointer-events: none;
   }
 
   .card-inner {
     display: flex;
     flex-direction: column;
     height: 100%;
-    z-index: 5;
     padding: var(--spacing-md);
+    z-index: 2;
   }
 
   .icon-container {
     width: 3.5rem;
     height: 3.5rem;
     border-radius: var(--radius-md);
-    background-color: var(--sage-light);
+    background: var(--sage-light);
     color: var(--forest);
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
     margin-bottom: var(--spacing-md);
-    transition: transform var(--transition-normal), background-color var(--transition-normal), color var(--transition-normal);
+    transition: .3s;
   }
 
-  /* Adjust icon sizing */
   :global(.service-icon) {
     width: 1.8rem;
     height: 1.8rem;
@@ -211,78 +214,63 @@ const services = [
   .service-card-title {
     font-size: 1.25rem;
     color: var(--forest-deep);
-    margin-bottom: 0.75rem;
-    transition: color var(--transition-fast);
+    margin-bottom: .75rem;
   }
 
   .service-card-desc {
-    font-size: 0.95rem;
+    font-size: .95rem;
     color: var(--text-muted);
     line-height: 1.6;
-    margin-bottom: 0;
-    transition: opacity var(--transition-fast);
   }
 
-  /* Details container - hidden by default, expands on hover */
   .service-card-details {
     max-height: 0;
     opacity: 0;
     overflow: hidden;
-    transition: max-height var(--transition-normal), opacity var(--transition-normal);
+    transition: .3s;
   }
 
   .details-divider {
     height: 1px;
-    background-color: oklch(0% 0 0 / 8%);
+    background: oklch(0% 0 0 / 8%);
     margin: 1rem 0;
   }
 
   .details-text {
-    font-size: 0.88rem;
+    font-size: .88rem;
     color: var(--forest-deep);
     line-height: 1.5;
-    margin-bottom: 0;
   }
 
-  /* Hover States */
   .service-card:hover {
     transform: translateY(-6px);
     box-shadow: var(--shadow-lg);
   }
 
   .service-card:hover .icon-container {
-    background-color: var(--forest);
+    background: var(--forest);
     color: var(--accent);
     transform: scale(1.05) rotate(5deg);
   }
 
-  .service-card:hover .service-card-title {
-    color: var(--forest);
-  }
-
   .service-card:hover .service-card-details {
-    max-height: 200px;
+    max-height: 220px;
     opacity: 1;
-    margin-top: 0.5rem;
+    margin-top: .5rem;
   }
 
-  /* Gradient glow border effect */
   .card-border-gradient {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    inset: 0;
     border-radius: var(--radius-lg);
     border: 2px solid transparent;
-    background: linear-gradient(135deg, var(--sage) 0%, var(--accent) 100%) border-box;
+    background: linear-gradient(135deg, var(--sage), var(--accent)) border-box;
     mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
     -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
     opacity: 0;
-    transition: opacity var(--transition-normal);
-    z-index: 2;
+    transition: .3s;
     pointer-events: none;
   }
 
@@ -290,7 +278,6 @@ const services = [
     opacity: 1;
   }
 
-  /* Desktop Grid Asymmetry Settings */
   @media (min-width: 768px) {
     .services-grid {
       grid-template-columns: repeat(2, 1fr);
@@ -303,11 +290,10 @@ const services = [
       grid-template-columns: repeat(3, 1fr);
     }
 
-    /* Asymmetric sizing on desktop */
     .card-featured {
       grid-column: span 2;
     }
-    
+
     .card-featured .card-inner {
       display: grid;
       grid-template-columns: 80px 1fr;
@@ -317,22 +303,15 @@ const services = [
 
     .card-featured .icon-container {
       grid-row: span 2;
-      align-self: start;
       margin-bottom: 0;
     }
 
     .card-featured .service-card-title {
       grid-column: 2;
-      align-self: center;
-      margin-bottom: 0.5rem;
       font-size: 1.4rem;
     }
 
-    .card-featured .service-card-desc {
-      grid-column: 2;
-      font-size: 1rem;
-    }
-
+    .card-featured .service-card-desc,
     .card-featured .service-card-details {
       grid-column: 2;
     }
