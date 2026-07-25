@@ -1,4 +1,5 @@
 //author: Jhor
+//version: 1.0.1
 // @ts-check
 import { defineConfig } from 'astro/config';
 
