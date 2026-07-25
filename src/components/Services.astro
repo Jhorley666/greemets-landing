@@ -1,15 +1,7 @@
 ---
-import { Image } from 'astro:assets';
 import { Leaf, Wind, LineChart, ShieldCheck } from '@lucide/astro';
 
-// Importación estática de imágenes desde src/assets/img/
-// (Asegúrate de tener tus archivos en src/assets/img/)
-import imgRiesgos from '../assets/img/20161020_094141.jpg';
-import imgMetano from '../assets/img/20251008_094943.jpg';
-import imgCarbono from '../assets/img/IMG_0088.JPG';
-import imgEnergia from '../assets/img/IMG_0299.JPG';
-
-// Lista de servicios actualizada con objetos de imagen optimizados
+// Servicios con rutas estáticas hacia public/img/
 const services = [
   {
     id: 1,
@@ -19,7 +11,7 @@ const services = [
     details:
       "Identificamos peligros, minimizamos riesgos y fortalecemos la prevención para garantizar entornos de trabajo seguros, eficientes y en cumplimiento con la normativa vigente.",
     icon: ShieldCheck,
-    image: imgRiesgos,
+    image: "/img/20161020_094141.jpg",
     featured: true
   },
   {
@@ -30,7 +22,7 @@ const services = [
     details:
       "Aplicamos tecnologías avanzadas para identificar, cuantificar y gestionar emisiones fugitivas en instalaciones de producción, procesamiento, transporte y almacenamiento de hidrocarburos.",
     icon: Wind,
-    image: imgMetano,
+    image: "/img/20251008_094943.jpg",
     featured: false
   },
   {
@@ -41,7 +33,7 @@ const services = [
     details:
       "Cuantificamos las emisiones de gases de efecto invernadero, identificamos las principales fuentes de emisión y diseñamos planes de acción personalizados para reducirlas de manera eficiente y sostenible. Nuestros servicios permiten fortalecer el desempeño ambiental, cumplir con estándares y compromisos climáticos, y avanzar hacia operaciones más competitivas y bajas en carbono.",
     icon: Leaf,
-    image: imgCarbono,
+    image: "/img/IMG_0088.JPG",
     featured: true
   },
   {
@@ -52,7 +44,7 @@ const services = [
     details:
       "Realizamos diagnósticos energéticos, análisis de consumos y evaluación de medidas de eficiencia que permiten incrementar la productividad, disminuir el desperdicio energético y reducir las emisiones asociadas al consumo de energía. Nuestras soluciones fortalecen la competitividad y contribuyen a los objetivos de sostenibilidad y descarbonización.",
     icon: LineChart,
-    image: imgEnergia,
+    image: "/img/IMG_0299.JPG",
     featured: false
   }
 ];
@@ -77,7 +69,7 @@ const services = [
         return (
           <div class={`service-card reveal ${service.featured ? 'card-featured' : ''}`}>
             <div class="service-card-img-wrapper">
-              <Image
+              <img
                 src={service.image}
                 alt={service.title}
                 class="service-card-img"
