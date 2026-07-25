@@ -1,7 +1,13 @@
 ---
+import { Image } from 'astro:assets';
 import { Leaf, Wind, LineChart, ShieldCheck } from '@lucide/astro';
 
-// Servicios con rutas estáticas hacia public/img/
+// Importamos directamente las imágenes desde src/assets/img/
+import imgRiesgos from '../assets/img/20161020_094141.jpg';
+import imgMetano from '../assets/img/20251008_094943.jpg';
+import imgCarbono from '../assets/img/IMG_0088.JPG';
+import imgEnergia from '../assets/img/IMG_0299.JPG';
+
 const services = [
   {
     id: 1,
@@ -11,7 +17,7 @@ const services = [
     details:
       "Identificamos peligros, minimizamos riesgos y fortalecemos la prevención para garantizar entornos de trabajo seguros, eficientes y en cumplimiento con la normativa vigente.",
     icon: ShieldCheck,
-    image: "/img/20161020_094141.jpg",
+    image: imgRiesgos,
     featured: true
   },
   {
@@ -22,7 +28,7 @@ const services = [
     details:
       "Aplicamos tecnologías avanzadas para identificar, cuantificar y gestionar emisiones fugitivas en instalaciones de producción, procesamiento, transporte y almacenamiento de hidrocarburos.",
     icon: Wind,
-    image: "/img/20251008_094943.jpg",
+    image: imgMetano,
     featured: false
   },
   {
@@ -33,7 +39,7 @@ const services = [
     details:
       "Cuantificamos las emisiones de gases de efecto invernadero, identificamos las principales fuentes de emisión y diseñamos planes de acción personalizados para reducirlas de manera eficiente y sostenible. Nuestros servicios permiten fortalecer el desempeño ambiental, cumplir con estándares y compromisos climáticos, y avanzar hacia operaciones más competitivas y bajas en carbono.",
     icon: Leaf,
-    image: "/img/IMG_0088.JPG",
+    image: imgCarbono,
     featured: true
   },
   {
@@ -44,7 +50,7 @@ const services = [
     details:
       "Realizamos diagnósticos energéticos, análisis de consumos y evaluación de medidas de eficiencia que permiten incrementar la productividad, disminuir el desperdicio energético y reducir las emisiones asociadas al consumo de energía. Nuestras soluciones fortalecen la competitividad y contribuyen a los objetivos de sostenibilidad y descarbonización.",
     icon: LineChart,
-    image: "/img/IMG_0299.JPG",
+    image: imgEnergia,
     featured: false
   }
 ];
@@ -69,7 +75,7 @@ const services = [
         return (
           <div class={`service-card reveal ${service.featured ? 'card-featured' : ''}`}>
             <div class="service-card-img-wrapper">
-              <img
+              <Image
                 src={service.image}
                 alt={service.title}
                 class="service-card-img"
@@ -202,7 +208,7 @@ const services = [
     justify-content: center;
     align-items: center;
     margin-bottom: var(--spacing-md);
-    transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease;
+    transition: .3s;
   }
 
   :global(.service-icon) {
@@ -227,7 +233,7 @@ const services = [
     max-height: 0;
     opacity: 0;
     overflow: hidden;
-    transition: max-height 0.4s ease, opacity 0.3s ease, margin-top 0.3s ease;
+    transition: .3s;
   }
 
   .details-divider {
@@ -254,7 +260,7 @@ const services = [
   }
 
   .service-card:hover .service-card-details {
-    max-height: 300px;
+    max-height: 220px;
     opacity: 1;
     margin-top: .5rem;
   }
@@ -270,7 +276,7 @@ const services = [
     -webkit-mask-composite: xor;
     mask-composite: exclude;
     opacity: 0;
-    transition: opacity 0.3s ease;
+    transition: .3s;
     pointer-events: none;
   }
 
