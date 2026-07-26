@@ -1,15 +1,14 @@
 //author: Jhor
-//version: 1.0.3
+//version: 1.0.4
 // @ts-check
-import { defineConfig, passthroughImageService } from 'astro/config';
+import { defineConfig } from 'astro/config';
 
 import cloudflare from '@astrojs/cloudflare';
 
 // https://astro.build/config
 export default defineConfig({
   site: 'https://greemets.net',
-  adapter: cloudflare(),
-  image: {
-    service: passthroughImageService(),
-  },
+  adapter: cloudflare({
+    imageService: 'passthrough',
+  }),
 });
