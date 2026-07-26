@@ -1,7 +1,7 @@
 //author: Jhor
-//version: 1.0.2
+//version: 1.0.3
 // @ts-check
-import { defineConfig } from 'astro/config';
+import { defineConfig, passthroughImageService } from 'astro/config';
 
 import cloudflare from '@astrojs/cloudflare';
 
@@ -9,4 +9,7 @@ import cloudflare from '@astrojs/cloudflare';
 export default defineConfig({
   site: 'https://greemets.net',
   adapter: cloudflare(),
+  image: {
+    service: passthroughImageService(),
+  },
 });
