@@ -1,11 +1,20 @@
 ---
 // Nav.astro
+import { useTranslations, getAlternateLanguages, defaultLang, type Lang } from '../i18n/utils';
+
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = defaultLang } = Astro.props;
+const t = useTranslations(lang);
+const alternates = getAlternateLanguages(lang);
 ---
 
 <header class="header glass" id="navbar">
   <div class="container nav-container">
     <!-- Logo -->
-    <a href="#" class="logo">
+    <a href={lang === defaultLang ? '/' : `/${lang}/`} class="logo">
       <img src={`${import.meta.env.BASE_URL}img/logo_nav.png`} alt="Green Metrics Solutions - GREEMETS" class="logo-img" />
       <span class="logo-text" aria-hidden="true">
         <span class="logo-row logo-row-primary">
@@ -19,16 +28,24 @@
     </a>
 
     <!-- Desktop Navigation Links -->
-    <nav class="nav-desktop" aria-label="Navegación principal">
-      <a href="#sobre-nosotros" class="nav-link">Nosotros</a>
-      <a href="#servicios" class="nav-link">Servicios</a>
+    <nav class="nav-desktop" aria-label={t.nav.ariaLabel}>
+      <a href="#sobre-nosotros" class="nav-link">{t.nav.about}</a>
+      <a href="#servicios" class="nav-link">{t.nav.services}</a>
 
-      <a href="#por-que-nosotros" class="nav-link">Diferenciales</a>
-      <a href="#contacto" class="btn btn-primary btn-sm-nav">Hablar con un experto</a>
+      <a href="#por-que-nosotros" class="nav-link">{t.nav.differentiators}</a>
+
+      <!-- Language Switcher -->
+      <div class="lang-switcher" aria-label={t.nav.langSwitchAria}>
+        {alternates.map((alt) => (
+          <a href={alt.path} class="lang-link" hreflang={alt.lang}>{alt.lang.toUpperCase()}</a>
+        ))}
+      </div>
+
+      <a href="#contacto" class="btn btn-primary btn-sm-nav">{t.nav.cta}</a>
     </nav>
 
     <!-- Mobile Hamburger Toggle Button -->
-    <button class="burger" id="burger-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-menu">
+    <button class="burger" id="burger-toggle" aria-label={t.nav.openMenu} aria-expanded="false" aria-controls="mobile-menu">
       <span class="burger-line"></span>
       <span class="burger-line"></span>
       <span class="burger-line"></span>
@@ -38,11 +55,18 @@
   <!-- Mobile Menu Drawer -->
   <div class="mobile-menu" id="mobile-menu">
     <nav class="nav-mobile-links">
-      <a href="#sobre-nosotros" class="mobile-link">Nosotros</a>
-      <a href="#servicios" class="mobile-link">Servicios</a>
+      <a href="#sobre-nosotros" class="mobile-link">{t.nav.about}</a>
+      <a href="#servicios" class="mobile-link">{t.nav.services}</a>
 
-      <a href="#por-que-nosotros" class="mobile-link">Diferenciales</a>
-      <a href="#contacto" class="btn btn-primary mobile-cta">Hablar con un experto</a>
+      <a href="#por-que-nosotros" class="mobile-link">{t.nav.differentiators}</a>
+
+      <div class="lang-switcher lang-switcher-mobile" aria-label={t.nav.langSwitchAria}>
+        {alternates.map((alt) => (
+          <a href={alt.path} class="lang-link" hreflang={alt.lang}>{alt.label}</a>
+        ))}
+      </div>
+
+      <a href="#contacto" class="btn btn-primary mobile-cta">{t.nav.cta}</a>
     </nav>
   </div>
 </header>
@@ -184,6 +208,40 @@
   .btn-sm-nav {
     padding: 0.6rem 1.4rem;
     font-size: 0.85rem;
+  }
+
+  /* Language switcher */
+  .lang-switcher {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: var(--radius-full);
+    border: 1px solid oklch(0% 0 0 / 10%);
+  }
+
+  .lang-link {
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: var(--text-muted);
+    padding: 0.15rem 0.3rem;
+  }
+
+  .lang-link:hover {
+    color: var(--forest);
+  }
+
+  .lang-switcher-mobile {
+    justify-content: center;
+    border: none;
+    padding: 0.5rem 0;
+  }
+
+  .lang-switcher-mobile .lang-link {
+    font-size: 0.9rem;
+    text-transform: none;
   }
 
   /* Hamburger Menu Toggle Button */

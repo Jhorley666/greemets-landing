@@ -1,77 +1,35 @@
 ---
 // Projects.astro
+import { useTranslations, defaultLang, type Lang } from '../i18n/utils';
 
-const projects = [
-  {
-    id: "proy-1",
-    title: "Descarbonización en Planta Alimenticia",
-    client: "Confiteca S.A.",
-    location: "Quito, Pichincha",
-    shortDesc: "Auditoría de gases de efecto invernadero e implementación de quemadores eficientes en caldera.",
-    fullDesc: "Realizamos la auditoría completa de emisiones de Alcance 1 y 2 bajo la norma ISO 14064. Identificamos que las calderas de generación de vapor representaban el 65% del total de emisiones de combustión directa. Diseñamos e implementamos un plan de modernización de quemadores industriales con control de oxígeno y precalentadores de aire de combustión.",
-    image: "/img/20161020_094141.jpg",
-    metrics: [
-      { value: "1,250 T", label: "CO₂ Reducido/Año" },
-      { value: "15%", label: "Ahorro Combustible" }
-    ],
-    duration: "6 Meses",
-    scope: "Alcance 1 y 2, ISO 14064-1"
-  },
-  {
-    id: "proy-2",
-    title: "Eficiencia Hídrica en Sector Florícola",
-    client: "Exportadora RoseLux",
-    location: "Cayambe, Pichincha",
-    shortDesc: "Cálculo y certificación de huella hídrica con rediseño del sistema de riego por goteo y recirculación.",
-    fullDesc: "Evaluamos los perfiles de consumo de agua (Huella azul, verde y gris) en un cultivo de rosas de exportación de 40 hectáreas siguiendo la metodología ISO 14046. A partir del diagnóstico, implementamos un sistema automatizado de pulso de riego por goteo y un canal de drenaje para recirculación de lixiviados en el sustrato.",
-    image: "/img/IMG_0288.JPG",
-    metrics: [
-      { value: "45,000 m³", label: "Agua Ahorrada/Año" },
-      { value: "98%", label: "Eficiencia de Riego" }
-    ],
-    duration: "8 Meses",
-    scope: "Huella Hídrica, ISO 14046"
-  },
-  {
-    id: "proy-3",
-    title: "Mitigación de Metano en Sector Gas y Petróleo",
-    client: "Oleoducto Andino",
-    location: "Lago Agrio, Sucumbíos",
-    shortDesc: "Diagnóstico de línea base y detección LDAR de emisiones fugitivas en válvulas y tanques.",
-    fullDesc: "Desplegamos equipos ópticos de termografía infrarroja (OGI) y analizadores portátiles para el mapeo, detección y cuantificación de emisiones fugitivas de metano en estaciones de bombeo de petróleo crudo. Diseñamos un programa sistemático de detección y reparación de fugas (LDAR) y capacitamos a las brigadas internas de mantenimiento.",
-    image: "/img/20251008_094943.jpg",
-    metrics: [
-      { value: "340 Ton", label: "CH₄ Fugitiva Eliminada" },
-      { value: "100%", label: "Válvulas Críticas Reparadas" }
-    ],
-    duration: "4 Meses",
-    scope: "Línea Base Metano, Programa LDAR"
-  },
-  {
-    id: "proy-4",
-    title: "Gestión de Energía ISO 50001",
-    client: "Aceros del Pacífico",
-    location: "Guayaquil, Guayas",
-    shortDesc: "Auditoría energética integral y diseño de indicadores de desempeño en planta metalúrgica.",
-    fullDesc: "Diseñamos e implementamos el Sistema de Gestión de Energía (SGEn) bajo la norma ISO 50001 en una planta metalúrgica de fundición de acero. Se establecieron líneas base de energía vinculando el consumo con las variables operativas críticas de producción. Se optimizó el control en hornos de arco eléctrico y se automatizaron compresores de aire.",
-    image: "/img/IMG_0088.JPG",
-    metrics: [
-      { value: "8%", label: "Ahorro Eléctrico Global" },
-      { value: "1.8 Años", label: "Retorno de Inversión" }
-    ],
-    duration: "12 Meses",
-    scope: "Gestión Energética, ISO 50001"
-  }
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = defaultLang } = Astro.props;
+const t = useTranslations(lang);
+
+// Language-independent data (ids, images) merged with the translated text content
+const projectMeta = [
+  { id: 'proy-1', image: '/img/20161020_094141.jpg' },
+  { id: 'proy-2', image: '/img/IMG_0288.JPG' },
+  { id: 'proy-3', image: '/img/20251008_094943.jpg' },
+  { id: 'proy-4', image: '/img/IMG_0088.JPG' },
 ];
+
+const projects = t.projects.items.map((item, i) => ({
+  ...item,
+  ...projectMeta[i],
+}));
 ---
 
 <section class="section projects-section" id="casos">
   <div class="container">
     <div class="projects-header reveal">
-      <span class="section-tag">Casos de Éxito</span>
-      <h2 class="projects-title">Impacto real en la <span class="accent-title">industria ecuatoriana</span></h2>
+      <span class="section-tag">{t.projects.tag}</span>
+      <h2 class="projects-title">{t.projects.titleBefore} <span class="accent-title">{t.projects.titleAccent}</span></h2>
       <p class="projects-subtitle">
-        Conozca cómo ayudamos a nuestros clientes a optimizar recursos, mitigar emisiones y obtener certificaciones globales mediante soluciones basadas en ingeniería y ciencia de datos.
+        {t.projects.subtitle}
       </p>
     </div>
 
@@ -91,7 +49,7 @@ const projects = [
             <p class="project-card-desc">{project.shortDesc}</p>
             
             <button class="project-btn-detail" data-open-modal={project.id}>
-              Ver impacto y detalles
+              {t.projects.detailCta}
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <line x1="5" y1="12" x2="19" y2="12"></line>
                 <polyline points="12 5 19 12 12 19"></polyline>
@@ -108,7 +66,7 @@ const projects = [
     <dialog class="project-dialog" id={`dialog-${project.id}`}>
       <div class="dialog-content glass">
         <!-- Close button -->
-        <button class="dialog-close" data-close-modal={project.id} aria-label="Cerrar modal">
+        <button class="dialog-close" data-close-modal={project.id} aria-label={t.projects.closeModalAria}>
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <line x1="18" y1="6" x2="6" y2="18"></line>
             <line x1="6" y1="6" x2="18" y2="18"></line>
@@ -136,23 +94,23 @@ const projects = [
             <div class="dialog-divider"></div>
             
             <div class="dialog-body-text">
-              <h4>Descripción del Proyecto</h4>
+              <h4>{t.projects.descriptionHeading}</h4>
               <p>{project.fullDesc}</p>
               
               <div class="dialog-details-list">
                 <div class="detail-item">
-                  <strong>Ámbito de Aplicación:</strong>
+                  <strong>{t.projects.scopeLabel}</strong>
                   <span>{project.scope}</span>
                 </div>
                 <div class="detail-item">
-                  <strong>Duración del Proyecto:</strong>
+                  <strong>{t.projects.durationLabel}</strong>
                   <span>{project.duration}</span>
                 </div>
               </div>
             </div>
 
             <a href="#contacto" class="btn btn-primary dialog-cta" data-close-modal={project.id}>
-              Quiero un diagnóstico similar
+              {t.projects.dialogCta}
             </a>
           </div>
         </div>

@@ -1,5 +1,13 @@
 ---
 // Hero.astro
+import { useTranslations, defaultLang, type Lang } from '../i18n/utils';
+
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = defaultLang } = Astro.props;
+const t = useTranslations(lang);
 ---
 
 <section class="hero-section" id="inicio">
@@ -11,27 +19,27 @@
   <div class="container hero-content">
     <div class="hero-text-block">
       <h1 class="hero-title reveal">
-        Medimos lo que realmente importa para construir un <span class="accent-serif">futuro sostenible</span>
+        {t.hero.titleBefore} <span class="accent-serif">{t.hero.titleAccent}</span>
       </h1>
       <p class="hero-subtitle reveal" style="transition-delay: 0.2s;">
-        Especialistas en descarbonización, medición de huella ecológica, seguridad industrial, análisis de riesgos, consultoría y certificación ambiental integral.
+        {t.hero.subtitle}
       </p>
       
       <div class="hero-actions reveal" style="transition-delay: 0.4s;">
-        <a href="#contacto" class="btn btn-accent btn-hero">Hablar con un experto</a>
-        <a href="#servicios" class="btn btn-secondary btn-hero-secondary">Ver Servicios</a>
+        <a href="#contacto" class="btn btn-accent btn-hero">{t.hero.ctaPrimary}</a>
+        <a href="#servicios" class="btn btn-secondary btn-hero-secondary">{t.hero.ctaSecondary}</a>
       </div>
     </div>
   </div>
 
   <!-- Scroll Down Indicator (Positioned safely below CTAs) -->
   <div class="scroll-indicator-container">
-    <a href="#sobre-nosotros" aria-label="Desplazarse hacia abajo" class="scroll-indicator">
+    <a href="#sobre-nosotros" aria-label={t.hero.scrollAria} class="scroll-indicator">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <line x1="12" y1="5" x2="12" y2="19"></line>
         <polyline points="19 12 12 19 5 12"></polyline>
       </svg>
-      <span class="scroll-text">Descubrir</span>
+      <span class="scroll-text">{t.hero.scrollLabel}</span>
     </a>
   </div>
 

@@ -1,64 +1,39 @@
 ---
 import { Leaf, Wind, LineChart, ShieldCheck } from '@lucide/astro';
+import { useTranslations, defaultLang, type Lang } from '../i18n/utils';
 
-const services = [
-  {
-    id: 1,
-    title: "Análisis de Riesgos Laborales",
-    description:
-      "Protegemos lo más importante de su organización: su gente y sus operaciones mediante servicios especializados en análisis de riesgos laborales y evaluación de la infraestructura de los sistemas de gestión en seguridad industrial.",
-    details:
-      "Identificamos peligros, minimizamos riesgos y fortalecemos la prevención para garantizar entornos de trabajo seguros, eficientes y en cumplimiento con la normativa vigente.",
-    icon: ShieldCheck,
-    image: "/img/20161020_094141.jpg",
-    featured: true
-  },
-  {
-    id: 2,
-    title: "Mitigación de Emisiones de Metano",
-    description:
-      "Ayudamos a las empresas del sector de petróleo y gas a reducir sus emisiones de metano mediante la implementación de programas de Detección y Reparación de Fugas (LDAR).",
-    details:
-      "Aplicamos tecnologías avanzadas para identificar, cuantificar y gestionar emisiones fugitivas en instalaciones de producción, procesamiento, transporte y almacenamiento de hidrocarburos.",
-    icon: Wind,
-    image: "/img/20251008_094943.jpg",
-    featured: false
-  },
-  {
-    id: 3,
-    title: "Huella de Carbono y Plan de Descarbonización",
-    description:
-      "Acompañamos a las organizaciones en la medición, gestión y reducción de su impacto climático mediante el cálculo de la huella de carbono corporativa y el desarrollo de estrategias de descarbonización.",
-    details:
-      "Cuantificamos las emisiones de gases de efecto invernadero, identificamos las principales fuentes de emisión y diseñamos planes de acción personalizados para reducirlas de manera eficiente y sostenible. Nuestros servicios permiten fortalecer el desempeño ambiental, cumplir con estándares y compromisos climáticos, y avanzar hacia operaciones más competitivas y bajas en carbono.",
-    icon: Leaf,
-    image: "/img/IMG_0088.JPG",
-    featured: true
-  },
-  {
-    id: 4,
-    title: "Consultoría en Eficiencia Energética",
-    description:
-      "Ayudamos a las organizaciones a optimizar el uso de la energía y reducir sus costos operativos mediante la identificación de oportunidades de mejora en sus procesos e instalaciones.",
-    details:
-      "Realizamos diagnósticos energéticos, análisis de consumos y evaluación de medidas de eficiencia que permiten incrementar la productividad, disminuir el desperdicio energético y reducir las emisiones asociadas al consumo de energía. Nuestras soluciones fortalecen la competitividad y contribuyen a los objetivos de sostenibilidad y descarbonización.",
-    icon: LineChart,
-    image: "/img/IMG_0299.JPG",
-    featured: false
-  }
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = defaultLang } = Astro.props;
+const t = useTranslations(lang);
+
+// Language-independent data (icons, images, ordering); text comes from the i18n dictionary
+const serviceMeta = [
+  { icon: ShieldCheck, image: "/img/20161020_094141.jpg", featured: true },
+  { icon: Wind, image: "/img/20251008_094943.jpg", featured: false },
+  { icon: Leaf, image: "/img/IMG_0088.JPG", featured: true },
+  { icon: LineChart, image: "/img/IMG_0299.JPG", featured: false },
 ];
+
+const services = t.services.items.map((item, i) => ({
+  id: i + 1,
+  ...item,
+  ...serviceMeta[i],
+}));
 ---
 
 <section class="section services-section" id="servicios">
   <div class="container">
     <div class="services-header reveal">
-      <span class="section-tag">Nuestros Servicios</span>
+      <span class="section-tag">{t.services.tag}</span>
       <h2 class="services-title">
-        Ingeniería y consultoría especializada de
-        <span class="accent-title">alto nivel</span>
+        {t.services.titleBefore}
+        <span class="accent-title">{t.services.titleAccent}</span>
       </h2>
       <p class="services-subtitle">
-        Ofrecemos soluciones ambientales, energéticas y de seguridad industrial con rigor científico, alineadas con los más altos estándares globales para impulsar la rentabilidad sostenible.
+        {t.services.subtitle}
       </p>
     </div>
 

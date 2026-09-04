@@ -1,5 +1,14 @@
 ---
 import { Mail, Phone, MapPin, Send } from '@lucide/astro';
+import { useTranslations, defaultLang, type Lang } from '../i18n/utils';
+
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = defaultLang } = Astro.props;
+const t = useTranslations(lang);
+const f = t.contact.form;
 ---
 
 <section class="section contact-section" id="contacto">
@@ -7,10 +16,10 @@ import { Mail, Phone, MapPin, Send } from '@lucide/astro';
     <div class="contact-grid">
       <!-- Info Column -->
       <div class="contact-info-col reveal">
-        <span class="section-tag">Contacto</span>
-        <h2 class="contact-title">¿Listo para dar el <span class="accent-title">siguiente paso</span>?</h2>
+        <span class="section-tag">{t.contact.tag}</span>
+        <h2 class="contact-title">{t.contact.titleBefore} <span class="accent-title">{t.contact.titleAccent}</span>{t.contact.titleAfter}</h2>
         <p class="contact-desc">
-          Contáctenos hoy mismo para recibir un diagnóstico preliminar sin compromiso. Nuestro equipo de ingenieros está listo para diseñar la solución ambiental ideal para su empresa.
+          {t.contact.description}
         </p>
 
         <div class="contact-methods">
@@ -19,9 +28,9 @@ import { Mail, Phone, MapPin, Send } from '@lucide/astro';
               <MapPin class="method-icon" />
             </div>
             <div class="method-text">
-              <h3>Ubicación</h3>
-              <p>Telmo Heredia y Elisa Mariño</p>
-              <p>San Juan de Cumbayá, Quito - Ecuador</p>
+              <h3>{t.contact.methods.locationTitle}</h3>
+              <p>{t.contact.methods.locationLine1}</p>
+              <p>{t.contact.methods.locationLine2}</p>
             </div>
           </div>
 
@@ -30,7 +39,7 @@ import { Mail, Phone, MapPin, Send } from '@lucide/astro';
               <Phone class="method-icon" />
             </div>
             <div class="method-text">
-              <h3>Teléfonos</h3>
+              <h3>{t.contact.methods.phoneTitle}</h3>
               <p><a href="tel:+593987889700">+593 987 889 700</a></p>
             </div>
           </div>
@@ -40,7 +49,7 @@ import { Mail, Phone, MapPin, Send } from '@lucide/astro';
               <Mail class="method-icon" />
             </div>
             <div class="method-text">
-              <h3>Correo Electrónico</h3>
+              <h3>{t.contact.methods.emailTitle}</h3>
               <p><a href="mailto:gerencia@greemets.com">gerencia@greemets.com</a></p>
             </div>
           </div>
@@ -49,47 +58,59 @@ import { Mail, Phone, MapPin, Send } from '@lucide/astro';
 
       <!-- Form Column -->
       <div class="contact-form-col reveal" style="transition-delay: 0.2s;">
-        <form class="contact-form glass" id="contact-form-el" novalidate>
+        <form
+          class="contact-form glass"
+          id="contact-form-el"
+          novalidate
+          data-toast-validation-error={f.toastValidationError}
+          data-toast-success={f.toastSuccess}
+          data-toast-generic-error={f.toastGenericError}
+          data-submitting-text={f.submitting}
+          data-payload-name={f.payloadName}
+          data-payload-company={f.payloadCompany}
+          data-payload-phone={f.payloadPhone}
+          data-payload-message={f.payloadMessage}
+        >
           <!-- Formspree Config -->
-          <input type="hidden" name="subject" value="Nuevo contacto desde sitio web GREEMETS" />
+          <input type="hidden" name="subject" value={f.subjectHidden} />
 
           <div class="form-group">
-            <label for="form-name">Nombre Completo *</label>
-            <input type="text" id="form-name" name="name" required placeholder="Ej. Ing. Juan Pérez" />
-            <span class="error-msg" id="error-name">El nombre es obligatorio.</span>
+            <label for="form-name">{f.nameLabel}</label>
+            <input type="text" id="form-name" name="name" required placeholder={f.namePlaceholder} />
+            <span class="error-msg" id="error-name">{f.nameError}</span>
           </div>
 
           <div class="form-group">
-            <label for="form-company">Empresa / Organización *</label>
-            <input type="text" id="form-company" name="company" required placeholder="Ej. Industrias del Sur" />
-            <span class="error-msg" id="error-company">La empresa es obligatoria.</span>
+            <label for="form-company">{f.companyLabel}</label>
+            <input type="text" id="form-company" name="company" required placeholder={f.companyPlaceholder} />
+            <span class="error-msg" id="error-company">{f.companyError}</span>
           </div>
 
           <div class="form-grid">
             <div class="form-group">
-              <label for="form-email">Email Corporativo *</label>
-              <input type="email" id="form-email" name="email" required placeholder="juan.perez@empresa.com" />
-              <span class="error-msg" id="error-email">Ingrese un correo válido.</span>
+              <label for="form-email">{f.emailLabel}</label>
+              <input type="email" id="form-email" name="email" required placeholder={f.emailPlaceholder} />
+              <span class="error-msg" id="error-email">{f.emailError}</span>
             </div>
 
             <div class="form-group">
-              <label for="form-phone">Teléfono de Contacto (Formato Ec) *</label>
+              <label for="form-phone">{f.phoneLabel}</label>
               <div class="phone-input-wrapper">
                 <span class="phone-prefix">+593</span>
-                <input type="tel" id="form-phone" name="phone" required placeholder="987654321" />
+                <input type="tel" id="form-phone" name="phone" required placeholder={f.phonePlaceholder} />
               </div>
-              <span class="error-msg" id="error-phone">Ingrese un celular de 9 dígitos o fijo de 8 dígitos (sin el +593).</span>
+              <span class="error-msg" id="error-phone">{f.phoneError}</span>
             </div>
           </div>
 
           <div class="form-group">
-            <label for="form-message">Mensaje / Requerimiento *</label>
-            <textarea id="form-message" name="message" rows="5" required placeholder="Describa brevemente los servicios de su interés..."></textarea>
-            <span class="error-msg" id="error-message">El mensaje no puede estar vacío.</span>
+            <label for="form-message">{f.messageLabel}</label>
+            <textarea id="form-message" name="message" rows="5" required placeholder={f.messagePlaceholder}></textarea>
+            <span class="error-msg" id="error-message">{f.messageError}</span>
           </div>
 
           <button type="submit" class="btn btn-primary form-submit-btn">
-            Enviar Mensaje
+            {f.submit}
             <Send class="btn-icon" />
           </button>
         </form>
@@ -369,7 +390,7 @@ import { Mail, Phone, MapPin, Send } from '@lucide/astro';
       }
 
       if (!isValid) {
-        window.showToast('Por favor, complete correctamente los campos requeridos.', 'error');
+        window.showToast(form.dataset.toastValidationError || 'Please fill in all required fields correctly.', 'error');
         return;
       }
 
@@ -377,17 +398,22 @@ import { Mail, Phone, MapPin, Send } from '@lucide/astro';
       const submitBtn = form.querySelector('.form-submit-btn') as HTMLButtonElement;
       const originalBtnHtml = submitBtn.innerHTML;
       submitBtn.disabled = true;
-      submitBtn.innerHTML = 'Enviando...';
+      submitBtn.innerHTML = form.dataset.submittingText || 'Sending...';
 
       // Construir payload para Formspree (email y mensaje concatenado)
       const formspreeData = new FormData();
       formspreeData.append('email', emailInput.value);
-      
-      const combinedMessage = `Nombre: ${nameInput.value}
-Empresa: ${companyInput.value}
-Teléfono: +593 ${phoneInput.value}
 
-Mensaje original:
+      const labelName = form.dataset.payloadName || 'Name';
+      const labelCompany = form.dataset.payloadCompany || 'Company';
+      const labelPhone = form.dataset.payloadPhone || 'Phone';
+      const labelMessage = form.dataset.payloadMessage || 'Original message';
+
+      const combinedMessage = `${labelName}: ${nameInput.value}
+${labelCompany}: ${companyInput.value}
+${labelPhone}: +593 ${phoneInput.value}
+
+${labelMessage}:
 ${messageInput.value}`;
 
       formspreeData.append('message', combinedMessage);
@@ -403,19 +429,19 @@ ${messageInput.value}`;
         });
         
         if (response.ok) {
-          window.showToast('¡Mensaje enviado con éxito! Nos contactaremos pronto.', 'success');
+          window.showToast(form.dataset.toastSuccess || 'Message sent successfully!', 'success');
           form.reset();
         } else {
           const data = await response.json();
           if (Object.hasOwn(data, 'errors')) {
             throw new Error(data.errors.map((error: any) => error.message).join(", "));
           } else {
-            throw new Error('Error al enviar el formulario');
+            throw new Error(form.dataset.toastGenericError || 'Error submitting the form');
           }
         }
       } catch (err: any) {
         console.error(err);
-        window.showToast(err.message || 'Hubo un error al enviar el formulario. Intente de nuevo.', 'error');
+        window.showToast(err.message || form.dataset.toastGenericError || 'There was an error submitting the form. Please try again.', 'error');
       } finally {
         submitBtn.disabled = false;
         submitBtn.innerHTML = originalBtnHtml;

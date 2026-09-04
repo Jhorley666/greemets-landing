@@ -1,15 +1,23 @@
 ---
 // CookieBanner.astro
+import { useTranslations, defaultLang, type Lang } from '../i18n/utils';
+
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = defaultLang } = Astro.props;
+const t = useTranslations(lang);
 ---
 
 <div class="cookie-banner glass" id="cookie-banner-el">
   <div class="cookie-content">
     <p>
-      Utilizamos cookies propias y de terceros para analizar el tráfico de nuestro sitio y optimizar su experiencia de usuario. Al hacer clic en "Aceptar", consiente el uso de todas las cookies.
+      {t.cookie.message}
     </p>
     <div class="cookie-actions">
-      <button class="btn btn-secondary btn-cookie-decline" id="cookie-decline-btn">Rechazar</button>
-      <button class="btn btn-primary btn-cookie-accept" id="cookie-accept-btn">Aceptar</button>
+      <button class="btn btn-secondary btn-cookie-decline" id="cookie-decline-btn">{t.cookie.decline}</button>
+      <button class="btn btn-primary btn-cookie-accept" id="cookie-accept-btn">{t.cookie.accept}</button>
     </div>
   </div>
 </div>

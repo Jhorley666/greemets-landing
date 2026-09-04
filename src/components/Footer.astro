@@ -1,5 +1,13 @@
 ---
 import { Mail, Phone, MapPin } from '@lucide/astro';
+import { useTranslations, defaultLang, type Lang } from '../i18n/utils';
+
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = defaultLang } = Astro.props;
+const t = useTranslations(lang);
 
 const currentYear = new Date().getFullYear();
 ---
@@ -8,16 +16,16 @@ const currentYear = new Date().getFullYear();
   <div class="container footer-grid">
     <!-- Brand column -->
     <div class="footer-brand-col">
-      <a href="#" class="footer-logo">
+      <a href={lang === defaultLang ? '/' : `/${lang}/`} class="footer-logo">
         <span class="logo-accent">G</span>REEMETS
       </a>
-      <p class="footer-tagline">Green Metrics Solutions</p>
+      <p class="footer-tagline">{t.footer.tagline}</p>
       <p class="footer-desc">
-        Ingeniería y consultoría técnica especializada en cálculo, reducción y certificación de huellas ambientales en el sector industrial de Ecuador.
+        {t.footer.description}
       </p>
       
       <div class="social-links">
-        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn de GREEMETS" class="social-btn">
+        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label={t.footer.linkedinAria} class="social-btn">
           <svg class="social-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
             <rect x="2" y="9" width="4" height="12"></rect>
@@ -29,36 +37,34 @@ const currentYear = new Date().getFullYear();
 
     <!-- Quick Links -->
     <div class="footer-links-col">
-      <h3>Navegación</h3>
+      <h3>{t.footer.navHeading}</h3>
       <ul class="footer-links-list">
-        <li><a href="#inicio">Inicio</a></li>
-        <li><a href="#sobre-nosotros">Nosotros</a></li>
-        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#inicio">{t.footer.nav.home}</a></li>
+        <li><a href="#sobre-nosotros">{t.footer.nav.about}</a></li>
+        <li><a href="#servicios">{t.footer.nav.services}</a></li>
 
-        <li><a href="#por-que-nosotros">Diferenciales</a></li>
-        <li><a href="#contacto">Contacto</a></li>
+        <li><a href="#por-que-nosotros">{t.footer.nav.differentiators}</a></li>
+        <li><a href="#contacto">{t.footer.nav.contact}</a></li>
       </ul>
     </div>
 
     <!-- Services Links -->
     <div class="footer-links-col">
-      <h3>Servicios Principales</h3>
+      <h3>{t.footer.servicesHeading}</h3>
       <ul class="footer-links-list">
-        <li><a href="#servicios">Huella de Carbono</a></li>
-        <li><a href="#servicios">Huella Hídrica</a></li>
-        <li><a href="#servicios">Mitigación de Metano</a></li>
-        <li><a href="#servicios">Seguridad y Salud</a></li>
-        <li><a href="#servicios">Sistemas de Gestión ISO</a></li>
+        {t.footer.servicesList.map((service) => (
+          <li><a href="#servicios">{service}</a></li>
+        ))}
       </ul>
     </div>
 
     <!-- Address / Details -->
     <div class="footer-info-col">
-      <h3>Oficina Matriz</h3>
+      <h3>{t.footer.officeHeading}</h3>
       <div class="footer-address">
         <div class="address-item">
           <MapPin class="footer-info-icon" />
-          <span>Telmo Heredia y Elisa Mariño, San Juan de Cumbayá, Quito - Ecuador</span>
+          <span>{t.footer.addressLine}</span>
         </div>
         <div class="address-item">
           <Phone class="footer-info-icon" />
@@ -75,11 +81,11 @@ const currentYear = new Date().getFullYear();
   <!-- Bottom Bar -->
   <div class="footer-bottom">
     <div class="container bottom-container">
-      <p>&copy; {currentYear} Green Metrics Solutions GREEMETS. Todos los derechos reservados.</p>
+      <p>&copy; {currentYear} Green Metrics Solutions GREEMETS. {t.footer.rightsReserved}</p>
       <div class="bottom-links">
-        <a href="#legal-modal" id="legal-notice-btn">Aviso Legal</a>
+        <a href="#legal-modal" id="legal-notice-btn">{t.footer.legalNotice}</a>
         <span>|</span>
-        <a href="#privacy-modal" id="privacy-policy-btn">Política de Privacidad</a>
+        <a href="#privacy-modal" id="privacy-policy-btn">{t.footer.privacyPolicy}</a>
       </div>
     </div>
   </div>
@@ -87,22 +93,22 @@ const currentYear = new Date().getFullYear();
   <!-- Dialog Notice Modals (for client evaluation / legal completeness) -->
   <dialog class="legal-dialog" id="legal-dialog-el">
     <div class="legal-dialog-content glass">
-      <button class="dialog-close-btn" id="close-legal-btn" aria-label="Cerrar aviso legal">&times;</button>
-      <h3>Aviso Legal</h3>
+      <button class="dialog-close-btn" id="close-legal-btn" aria-label={t.footer.legalDialog.closeAria}>&times;</button>
+      <h3>{t.footer.legalDialog.heading}</h3>
       <div class="dialog-scroll-box">
-        <p><strong>Green Metrics Solutions GREEMETS</strong> es una marca comercial registrada en la República del Ecuador. Toda la información provista en este sitio web tiene carácter informativo y de presentación de servicios técnicos de consultoría.</p>
-        <p>Los derechos de propiedad intelectual del contenido, imágenes, código y textos de este sitio web pertenecen a GREEMETS o a sus respectivos licenciantes. Queda prohibida su reproducción parcial o total sin autorización expresa por escrito.</p>
+        <p set:html={t.footer.legalDialog.p1} />
+        <p>{t.footer.legalDialog.p2}</p>
       </div>
     </div>
   </dialog>
 
   <dialog class="legal-dialog" id="privacy-dialog-el">
     <div class="legal-dialog-content glass">
-      <button class="dialog-close-btn" id="close-privacy-btn" aria-label="Cerrar política de privacidad">&times;</button>
-      <h3>Política de Privacidad</h3>
+      <button class="dialog-close-btn" id="close-privacy-btn" aria-label={t.footer.privacyDialog.closeAria}>&times;</button>
+      <h3>{t.footer.privacyDialog.heading}</h3>
       <div class="dialog-scroll-box">
-        <p>De conformidad con la Ley Orgánica de Protección de Datos Personales de Ecuador, le informamos que los datos suministrados a través del formulario de contacto serán tratados exclusivamente para responder a su requerimiento comercial.</p>
-        <p>GREEMETS no vende, alquila ni comparte sus datos con terceros bajo ninguna circunstancia. Sus datos serán almacenados de forma segura e indefinida para el historial de correspondencia corporativa, a menos que solicite expresamente su eliminación escribiendo a gerencia@greemets.com.</p>
+        <p>{t.footer.privacyDialog.p1}</p>
+        <p>{t.footer.privacyDialog.p2}</p>
       </div>
     </div>
   </dialog>

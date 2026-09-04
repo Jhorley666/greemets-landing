@@ -1,45 +1,30 @@
 ---
 import { Brain, Globe, HeartPulse, TrendingUp } from '@lucide/astro';
+import { useTranslations, defaultLang, type Lang } from '../i18n/utils';
 
-const pillars = [
-  {
-    id: 1,
-    title: "Rigor Científico e Ingeniería de Datos",
-    description: "Nuestras mediciones y auditorías no son meras estimaciones generales. Empleamos modelado avanzado y análisis de datos de ingeniería para entregar métricas indudables, permitiendo la toma de decisiones basada en hechos.",
-    icon: Brain,
-    badge: "Precisión"
-  },
-  {
-    id: 2,
-    title: "Homologación y Estándares Internacionales",
-    description: "Cada proceso, reporte y consultoría que estructuramos está diseñado para cumplir directamente con los requerimientos de auditorías de certificación formal bajo estándares globales como ISO, GHG Protocol o CDP.",
-    icon: Globe,
-    badge: "Garantía"
-  },
-  {
-    id: 3,
-    title: "Enfoque Humano y Prevención de Riesgos",
-    description: "La sostenibilidad ambiental es inseparable de la seguridad y el bienestar de quienes hacen posible su operación. Diseñamos entornos seguros y saludables mediante consultoría de seguridad industrial y salud ocupacional.",
-    icon: HeartPulse,
-    badge: "Bienestar"
-  },
-  {
-    id: 4,
-    title: "Retorno de Inversión (ROI) Sostenible",
-    description: "No consideramos el cumplimiento ambiental como un gasto normativo pasivo. Estructuramos proyectos de reducción de carbono y agua que optimizan la eficiencia operativa, generando ahorros que compensan la inversión.",
-    icon: TrendingUp,
-    badge: "Eficiencia"
-  }
-];
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = defaultLang } = Astro.props;
+const t = useTranslations(lang);
+
+const pillarIcons = [Brain, Globe, HeartPulse, TrendingUp];
+
+const pillars = t.whyus.items.map((item, i) => ({
+  id: i + 1,
+  ...item,
+  icon: pillarIcons[i],
+}));
 ---
 
 <section class="section whyus-section" id="por-que-nosotros">
   <div class="container">
     <div class="whyus-header reveal">
-      <span class="section-tag">Diferenciales</span>
-      <h2 class="whyus-title">¿Por qué elegir a <span class="accent-title">GREEMETS</span>?</h2>
+      <span class="section-tag">{t.whyus.tag}</span>
+      <h2 class="whyus-title">{t.whyus.titleBefore} <span class="accent-title">{t.whyus.titleAccent}</span>{t.whyus.titleAfter}</h2>
       <p class="whyus-subtitle">
-        Ofrecemos un modelo de consultoría premium que conecta la responsabilidad ecológica con la eficiencia operativa y el desarrollo humano.
+        {t.whyus.subtitle}
       </p>
     </div>
 
@@ -63,7 +48,7 @@ const pillars = [
 
             <!-- Content text side -->
             <div class="pillar-content-side">
-              <span class="pillar-number">Pilar 0{pillar.id}</span>
+              <span class="pillar-number">{t.whyus.pillarLabel}{pillar.id}</span>
               <h3 class="pillar-title">{pillar.title}</h3>
               <p class="pillar-desc">{pillar.description}</p>
             </div>
